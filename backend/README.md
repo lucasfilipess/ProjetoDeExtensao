@@ -10,3 +10,5 @@ Para rodar a aplicação será necessário ter instalado em sua máquina a últi
 
 Clone o repositório usando git clone https://github.com/Lucas-FilipeSS/ProjetoExtensao.git.
 Depois navegue até a pasta do backend e utilize o comando "**npm install**" ou "**yarn install**" se for o caso, após instalar os node modules utilize "**npm start**" ou "**yarn start**", a aplicação estará disponível em http://localhost:3333
+
+knex migrate:make migration_name
