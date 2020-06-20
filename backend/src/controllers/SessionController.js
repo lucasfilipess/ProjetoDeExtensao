@@ -4,10 +4,10 @@ const GenerateToken = require('../utils/GenerateToken');
 module.exports = {
   async login(request, response) {
     try {
-      const { email, password } = request.body;
+      const { email, senha } = request.body;
 
-      const rows = await connection('???')
-        .select('password', 'id', 'name')
+      const rows = await connection('pessoa')
+        .select('tipo', 'id', 'senha')
         .where('email', email)
         .first();
 
@@ -15,18 +15,35 @@ module.exports = {
         return response.status(404).json({ msg: 'bad credentials' });
       }
 
-      if (password === rows.password) {
+      if (senha === rows.senha) {
+        let user;
+        if (rows.tipo === 1) {
+          [user] = await connection('professor')
+            .select('id')
+            .where('id_pessoa', rows.id);
+        } else if (rows.tipo === 2) {
+          [user] = await connection('aluno')
+            .select('id')
+            .where('id_pessoa', rows.id);
+        } else {
+          [user] = await connection('paciente')
+            .select('id')
+            .where('id_pessoa', rows.id);
+        }
+
         const token = GenerateToken({
-          id: rows.id,
-          name: rows.name,
+          id: user.id,
+          tipo: rows.tipo,
         });
-        const name = rows.name;
-        return response.status(200).json({ token, name });
+
+        return response.status(200).json({ token, tipo: rows.tipo });
       } else {
         return response.status(404).json({ msg: 'bad credentials' });
       }
     } catch (error) {
-      return response.status(500).json({ error: 'internal server error' });
+      return response
+        .status(500)
+        .json({ message: 'internal server error', error: error });
     }
   },
 };

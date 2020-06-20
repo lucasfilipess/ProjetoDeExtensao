@@ -13,10 +13,8 @@ module.exports = (request, response, next) => {
     if (error) {
       return response.status(401).send({ error: 'token invalid' });
     }
-
     request.id = decoded.id;
-    request.name = decoded.name;
-
+    request.tipo = decoded.tipo;
     return next();
   });
 };

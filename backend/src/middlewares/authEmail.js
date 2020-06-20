@@ -4,7 +4,7 @@ module.exports = async (request, response, next) => {
   try {
     const { email } = request.body;
 
-    const verify = await connection('users')
+    const verify = await connection('pessoa')
       .select('email')
       .where('email', email)
       .first();

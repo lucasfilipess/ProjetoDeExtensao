@@ -7,13 +7,14 @@ exports.up = function (knex) {
     table.string('rg').notNullable();
     table.string('telefone');
     table.string('celular').notNullable();
-    table.string('email');
+    table.string('email').notNullable();
     table.integer('cep').notNullable();
     table.string('uf').notNullable();
     table.string('cidade').notNullable();
     table.string('bairro').notNullable();
     table.string('rua').notNullable();
     table.integer('numero').notNullable();
+    // table.boolean('deletado').notNullable();
     table.string('complemento');
     table.string('senha').notNullable();
   });
