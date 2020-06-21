@@ -53,7 +53,8 @@ module.exports = {
           'pessoa.bairro',
           'pessoa.rua',
           'pessoa.numero',
-          'pessoa.complemento'
+          'pessoa.complemento',
+          'pessoa.senha'
         );
 
       return response.status(200).json(rows);

@@ -7,7 +7,39 @@ module.exports = {
       const { email, senha } = request.body;
 
       const rows = await connection('pessoa')
-        .select('tipo', 'id', 'senha')
+        .select('nome', 'tipo', 'id', 'senha')
+        .where('email', email)
+        .first();
+
+      if (!rows) {
+        return response.status(404).json({ msg: 'bad credentials' });
+      }
+
+      if (senha === rows.senha) {
+        const [user] = await connection('paciente')
+          .select('id')
+          .where('id_pessoa', rows.id);
+        const token = GenerateToken({
+          id: user.id,
+          tipo: rows.tipo,
+        });
+        return response.status(200).json({ token, name: rows.nome });
+      } else {
+        return response.status(404).json({ msg: 'bad credentials' });
+      }
+    } catch (error) {
+      return response
+        .status(500)
+        .json({ message: 'internal server error', error: error });
+    }
+  },
+
+  async adminLogin(request, response) {
+    try {
+      const { email, senha } = request.body;
+
+      const rows = await connection('pessoa')
+        .select('nome', 'tipo', 'id', 'senha')
         .where('email', email)
         .first();
 
@@ -25,18 +57,15 @@ module.exports = {
           [user] = await connection('aluno')
             .select('id')
             .where('id_pessoa', rows.id);
-        } else {
-          [user] = await connection('paciente')
-            .select('id')
-            .where('id_pessoa', rows.id);
         }
-
         const token = GenerateToken({
           id: user.id,
           tipo: rows.tipo,
         });
 
-        return response.status(200).json({ token, tipo: rows.tipo });
+        return response
+          .status(200)
+          .json({ token, type: rows.tipo, name: rows.nome });
       } else {
         return response.status(404).json({ msg: 'bad credentials' });
       }

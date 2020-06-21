@@ -10,6 +10,13 @@ module.exports = {
   patient: Joi.object().keys({
     tipo: Joi.number().integer().required().max(9),
     nome: Joi.string().required().min(5).max(30),
+    email: Joi.string().required().email(),
+    senha: Joi.string().required().min(8),
+  }),
+
+  completePatient: Joi.object().keys({
+    tipo: Joi.number().integer().required().max(9),
+    nome: Joi.string().required().min(5).max(30),
     cpf: Joi.number().integer().min(10000000000).max(99999999999).required(),
     rg: Joi.string().required().min(11).max(11),
     telefone: Joi.string().length(10),

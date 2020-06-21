@@ -1,0 +1,17 @@
+.Container {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  .Banner {
+    width: 50%;
+    height: 100vh;
+    img {
+      filter: brightness(80%);
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
+}

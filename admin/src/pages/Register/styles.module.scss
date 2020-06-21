@@ -1,0 +1,118 @@
+.LoginForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+  padding: 55px 64px 95px 64px;
+  .LoginContainer {
+    width: 400px;
+    .NavigateMenus {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      a {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        letter-spacing: -0.05px;
+        color: #9ea0a5;
+        // text-decoration: underline;
+        svg {
+          height: 24px;
+          width: 28px;
+          color: #9ea0a5;
+        }
+        span {
+          text-decoration: underline;
+          margin-left: 5px;
+        }
+      }
+      p {
+        font-size: 14px;
+        letter-spacing: -0.05px;
+        color: #9ea0a5;
+      }
+    }
+    h2 {
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 28px;
+      letter-spacing: -0.06px;
+      margin: 24px 0 4px 0;
+      color: #212529;
+    }
+    p {
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: -0.05px;
+      color: #9ea0a5;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      margin-top: 40px;
+      .StyledInput {
+        border: 1px solid rgba(0, 0, 0, 0.32);
+        border-radius: 4px;
+        margin-bottom: 16px;
+        font-size: 16px;
+        padding: 0 16px;
+        line-height: 24px;
+        letter-spacing: 0.15px;
+        color: rgba(0, 0, 0, 0.6);
+        height: 50px;
+        width: 100%;
+      }
+      .StyledFocus {
+        border: 2px solid #1665d8;
+        border-radius: 4px;
+        margin-bottom: 16px;
+        font-size: 16px;
+        padding: 0 16px;
+        line-height: 24px;
+        letter-spacing: 0.15px;
+        color: rgba(0, 0, 0, 0.6);
+        height: 50px;
+        width: 100%;
+      }
+      div {
+        display: flex;
+        align-items: center;
+        .StyledCheckbox {
+          margin-right: 10px;
+          height: 18px;
+          width: 18px;
+        }
+        p {
+          span {
+            text-decoration: underline;
+            color: #56575a;
+          }
+        }
+      }
+      button {
+        color: #fff;
+        height: 40px;
+        background: #1665d8;
+        margin-top: 24px;
+        border-radius: 4px;
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2),
+          0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14);
+        width: 100%;
+      }
+    }
+  }
+}
+.Banner {
+  width: 50%;
+  height: 100vh;
+  img {
+    filter: brightness(80%);
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}

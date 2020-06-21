@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: #ffff;
+  font: 400 14px Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+body::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+}
+button {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  font: 400 14px Roboto, sans-serif;
+  transition: filter 0.2s;
+}
+button:hover {
+  filter: brightness(90%);
+}
+a {
+  text-decoration: none;
+  outline: none;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}

@@ -3,7 +3,13 @@ const { celebrate } = require('celebrate');
 const routes = express.Router();
 const auth = require('./middlewares/auth');
 const authEmail = require('./middlewares/authEmail');
-const { login, patient, teacher, student } = require('./middlewares/schemas');
+const {
+  login,
+  patient,
+  teacher,
+  student,
+  completePatient,
+} = require('./middlewares/schemas');
 
 const SessionController = require('./controllers/SessionController');
 const PatientController = require('./controllers/PatientController');
@@ -16,6 +22,13 @@ routes.post(
     body: login,
   }),
   SessionController.login
+);
+routes.post(
+  '/admin/login',
+  celebrate({
+    body: login,
+  }),
+  SessionController.adminLogin
 );
 
 //////////////////////////////////////////////////////////////////////
@@ -38,7 +51,7 @@ routes.put(
   auth,
   // authEmail, depois validar o email quando o usuário for atualizar
   celebrate({
-    body: patient,
+    body: completePatient,
   }),
   PatientController.update
 );
