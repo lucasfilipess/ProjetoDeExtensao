@@ -4,24 +4,27 @@ const GenerateToken = require('../utils/GenerateToken');
 module.exports = {
   async index(request, response) {
     try {
-      const rows = await connection('pessoa')
-        .join('paciente', 'paciente.id_pessoa', '=', 'pessoa.id')
+      const rows = await connection('person')
+        .join('patient', 'patient.id_person', '=', 'person.id')
+        .where('patient.delete', false)
         .select(
-          'pessoa.id',
-          'pessoa.tipo',
-          'pessoa.nome',
-          'pessoa.cpf',
-          'pessoa.rg',
-          'pessoa.telefone',
-          'pessoa.celular',
-          'pessoa.email',
-          'pessoa.cep',
-          'pessoa.uf',
-          'pessoa.cidade',
-          'pessoa.bairro',
-          'pessoa.rua',
-          'pessoa.numero',
-          'pessoa.complemento'
+          'patient.id',
+          'patient.id_person',
+          'person.type',
+          'person.name',
+          'person.surname',
+          'person.cpf',
+          'person.rg',
+          'person.telephone',
+          'person.cellPhone',
+          'person.email',
+          'person.cep',
+          'person.uf',
+          'person.city',
+          'person.neighborhood',
+          'person.street',
+          'person.number',
+          'person.complement'
         );
 
       return response.status(200).json(rows);
@@ -35,26 +38,25 @@ module.exports = {
   async getMyData(request, response) {
     try {
       const id = request.id;
-      const rows = await connection('pessoa')
-        .join('paciente', 'paciente.id_pessoa', '=', 'pessoa.id')
-        .where('paciente.id', id)
+      const rows = await connection('person')
+        .join('patient', 'patient.id_person', '=', 'person.id')
+        .where('patient.id', id, 'patient.delete', false)
         .select(
-          'pessoa.id',
-          'pessoa.tipo',
-          'pessoa.nome',
-          'pessoa.cpf',
-          'pessoa.rg',
-          'pessoa.telefone',
-          'pessoa.celular',
-          'pessoa.email',
-          'pessoa.cep',
-          'pessoa.uf',
-          'pessoa.cidade',
-          'pessoa.bairro',
-          'pessoa.rua',
-          'pessoa.numero',
-          'pessoa.complemento',
-          'pessoa.senha'
+          'person.type',
+          'person.name',
+          'person.surname',
+          'person.cpf',
+          'person.rg',
+          'person.telephone',
+          'person.cellPhone',
+          'person.email',
+          'person.cep',
+          'person.uf',
+          'person.city',
+          'person.neighborhood',
+          'person.street',
+          'person.number',
+          'person.complement'
         );
 
       return response.status(200).json(rows);
@@ -68,47 +70,49 @@ module.exports = {
   async create(request, response) {
     try {
       const {
-        tipo,
-        nome,
+        type,
+        name,
+        surname,
         cpf,
         rg,
-        telefone,
-        celular,
+        telephone,
+        cellPhone,
         email,
         cep,
         uf,
-        cidade,
-        bairro,
-        rua,
-        numero,
-        complemento,
-        senha,
+        city,
+        neighborhood,
+        street,
+        number,
+        complement,
+        password,
       } = request.body;
 
-      const [id_pessoa] = await connection('pessoa').insert({
-        tipo,
-        nome,
+      const [id_person] = await connection('person').insert({
+        type,
+        name,
+        surname,
         cpf,
         rg,
-        telefone,
-        celular,
+        telephone,
+        cellPhone,
         email,
         cep,
         uf,
-        cidade,
-        bairro,
-        rua,
-        numero,
-        complemento,
-        senha,
+        city,
+        neighborhood,
+        street,
+        number,
+        complement,
+        password,
       });
-      const [id_paciente] = await connection('paciente').insert({
-        id_pessoa,
+      const [id_patient] = await connection('patient').insert({
+        id_person,
       });
 
       const token = GenerateToken({
-        id: id_paciente,
-        tipo: tipo,
+        id: id_patient,
+        type: type,
       });
 
       return response
@@ -125,51 +129,78 @@ module.exports = {
     try {
       const id = request.id;
       const {
-        tipo,
-        nome,
+        type,
+        name,
+        surname,
         cpf,
         rg,
-        telefone,
-        celular,
+        telephone,
+        cellPhone,
         email,
         cep,
         uf,
-        cidade,
-        bairro,
-        rua,
-        numero,
-        complemento,
-        senha,
+        city,
+        neighborhood,
+        street,
+        number,
+        complement,
+        password,
       } = request.body;
 
-      const id_pessoa_paciente = await connection('paciente')
-        .select('id_pessoa')
-        .where('paciente.id', id)
+      const id_person_patient = await connection('patient')
+        .select('id_person')
+        .where('patient.id', id)
         .first();
 
-      await connection('pessoa')
-        .where('pessoa.id', id_pessoa_paciente.id_pessoa)
+      await connection('person')
+        .where('person.id', id_person_patient.id_person)
         .update({
-          tipo,
-          nome,
+          type,
+          name,
+          surname,
           cpf,
           rg,
-          telefone,
-          celular,
+          telephone,
+          cellPhone,
           email,
           cep,
           uf,
-          cidade,
-          bairro,
-          rua,
-          numero,
-          complemento,
-          senha,
+          city,
+          neighborhood,
+          street,
+          number,
+          complement,
+          password,
         });
 
       return response
         .status(200)
         .json({ status: 'success', message: 'user updated' });
+    } catch (error) {
+      return response
+        .status(500)
+        .json({ message: 'internal server error', error: error });
+    }
+  },
+
+  async delete(request, response) {
+    try {
+      const id = request.id;
+
+      const id_person_patient = await connection('patient')
+        .select('id_person')
+        .where('patient.id', id)
+        .first();
+
+      await connection('person')
+        .where('person.id', id_person_patient.id_person)
+        .update({
+          delete: true,
+        });
+
+      return response
+        .status(200)
+        .json({ status: 'success', message: 'user deleted' });
     } catch (error) {
       return response
         .status(500)

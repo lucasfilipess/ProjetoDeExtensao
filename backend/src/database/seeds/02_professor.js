@@ -5,13 +5,13 @@ exports.seed = function (knex) {
       return knex('professor').insert([
         {
           id: 1,
-          id_pessoa: 1,
-          matricula: 120121445,
+          id_person: 1,
+          registration: 120121445,
         },
         {
           id: 2,
-          id_pessoa: 4,
-          matricula: 150151245,
+          id_person: 4,
+          registration: 150151245,
         },
       ]);
     });

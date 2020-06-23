@@ -1,10 +1,10 @@
 exports.up = function (knex) {
   return knex.schema.createTable('professor', function (table) {
     table.increments('id').primary();
-    table.integer('id_pessoa').notNullable();
-    table.integer('matricula').notNullable();
-
-    table.foreign('id_pessoa').references('id').inTable('pessoa');
+    table.integer('id_person').notNullable();
+    table.integer('registration').notNullable();
+    table.boolean('delete').defaultTo(false).notNullable();
+    table.foreign('id_person').references('id').inTable('pessoa');
   });
 };
 

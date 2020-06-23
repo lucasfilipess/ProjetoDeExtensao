@@ -8,10 +8,11 @@ module.exports = {
   }),
 
   patient: Joi.object().keys({
-    tipo: Joi.number().integer().required().max(9),
-    nome: Joi.string().required().min(5).max(30),
+    type: Joi.string().required(),
+    name: Joi.string().required().min(5).max(30),
+    surname: Joi.string().required().min(5).max(30),
     email: Joi.string().required().email(),
-    senha: Joi.string().required().min(8),
+    password: Joi.string().required().min(8),
   }),
 
   completePatient: Joi.object().keys({

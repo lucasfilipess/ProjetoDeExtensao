@@ -1,19 +1,19 @@
 exports.seed = function (knex) {
-  return knex('aluno')
+  return knex('student')
     .del()
     .then(function () {
-      return knex('aluno').insert([
+      return knex('student').insert([
         {
           id: 1,
-          id_pessoa: 2,
+          id_person: 2,
           ra: 424121445,
-          periodo: 2,
+          period: 2,
         },
         {
           id: 2,
-          id_pessoa: 5,
+          id_person: 5,
           ra: 550161245,
-          periodo: 6,
+          period: 6,
         },
       ]);
     });

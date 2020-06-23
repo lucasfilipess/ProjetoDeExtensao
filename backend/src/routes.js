@@ -13,7 +13,7 @@ const {
 
 const SessionController = require('./controllers/SessionController');
 const PatientController = require('./controllers/PatientController');
-const TeacherController = require('./controllers/TeacherController');
+const TeacherController = require('./controllers/ProfessorController');
 const StudentController = require('./controllers/StudentController');
 
 routes.post(
@@ -49,11 +49,20 @@ routes.post(
 routes.put(
   '/patient',
   auth,
-  // authEmail, depois validar o email quando o usuário for atualizar
+  authEmail,
   celebrate({
     body: completePatient,
   }),
   PatientController.update
+);
+
+routes.put(
+  '/patient/delete',
+  auth,
+  celebrate({
+    body: completePatient,
+  }),
+  PatientController.delete
 );
 
 //////////////////////////////////////////////////////////////////////

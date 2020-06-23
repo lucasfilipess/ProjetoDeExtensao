@@ -4,25 +4,25 @@ const connection = require('../database/connection');
 module.exports = {
   async index(request, response) {
     try {
-      const rows = await connection('pessoa')
-        .join('professor', 'professor.id_pessoa', '=', 'pessoa.id')
+      const rows = await connection('person')
+        .join('professor', 'professor.person', '=', 'person.id')
         .select(
-          'pessoa.id',
+          'person.id',
           'professor.matricula',
-          'pessoa.tipo',
-          'pessoa.nome',
-          'pessoa.cpf',
-          'pessoa.rg',
-          'pessoa.telefone',
-          'pessoa.celular',
-          'pessoa.email',
-          'pessoa.cep',
-          'pessoa.uf',
-          'pessoa.cidade',
-          'pessoa.bairro',
-          'pessoa.rua',
-          'pessoa.numero',
-          'pessoa.complemento'
+          'person.tipo',
+          'person.nome',
+          'person.cpf',
+          'person.rg',
+          'person.telefone',
+          'person.celular',
+          'person.email',
+          'person.cep',
+          'person.uf',
+          'person.cidade',
+          'person.bairro',
+          'person.rua',
+          'person.numero',
+          'person.complemento'
         );
 
       return response.status(200).json(rows);

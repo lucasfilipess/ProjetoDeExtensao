@@ -8,8 +8,9 @@ module.exports = async (request, response, next) => {
       .select('email')
       .where('email', email)
       .first();
-
     if (!verify) {
+      return next();
+    } else if (verify.email === email) {
       return next();
     } else {
       return response.status(422).json({ error: 'email already registered' });
