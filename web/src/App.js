@@ -16,8 +16,13 @@ const LoadableSettings = Loadable({
   loading: Loader,
 });
 
+const LoadableServiceArea = Loadable({
+  loader: () => import('./pages/ServiceArea'),
+  loading: Loader,
+});
+
 function App() {
-  const [isActive, setIsActive] = useState(1);
+  const [isActive, setIsActive] = useState(null);
 
   return (
     <Layout activeTab={isActive}>
@@ -33,6 +38,12 @@ function App() {
           path="/home/settings"
           render={(props) => (
             <LoadableSettings {...props} setIsActive={setIsActive} />
+          )}
+        />
+        <Route
+          path="/home/service-area"
+          render={(props) => (
+            <LoadableServiceArea {...props} setIsActive={setIsActive} />
           )}
         />
       </Switch>
