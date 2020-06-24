@@ -3,17 +3,18 @@ const { celebrate } = require('celebrate');
 const routes = express.Router();
 const auth = require('./middlewares/auth');
 const authEmail = require('./middlewares/authEmail');
+const authEmailUpdate = require('./middlewares/authEmailUpdate');
 const {
   login,
   patient,
-  teacher,
+  professor,
   student,
   completePatient,
 } = require('./middlewares/schemas');
 
 const SessionController = require('./controllers/SessionController');
 const PatientController = require('./controllers/PatientController');
-const TeacherController = require('./controllers/ProfessorController');
+const ProfessorController = require('./controllers/ProfessorController');
 const StudentController = require('./controllers/StudentController');
 
 routes.post(
@@ -49,46 +50,41 @@ routes.post(
 routes.put(
   '/patient',
   auth,
-  authEmail,
+  authEmailUpdate,
   celebrate({
     body: completePatient,
   }),
   PatientController.update
 );
 
-routes.put(
-  '/patient/delete',
-  auth,
-  celebrate({
-    body: completePatient,
-  }),
-  PatientController.delete
-);
+routes.put('/patient/delete', auth, PatientController.delete);
 
 //////////////////////////////////////////////////////////////////////
 
-routes.get('/teacher', TeacherController.index);
+routes.get('/professor', ProfessorController.index);
 
-routes.get('/teacher/my-data', auth, TeacherController.getMyData);
+routes.get('/professor/my-data', auth, ProfessorController.getMyData);
 
 routes.post(
-  '/teacher',
+  '/professor',
   authEmail,
   celebrate({
-    body: teacher,
+    body: professor,
   }),
-  TeacherController.create
+  ProfessorController.create
 );
 
 routes.put(
-  '/teacher',
+  '/professor',
   auth,
-  // authEmail, depois validar o email quando o usuário for atualizar
+  authEmailUpdate,
   celebrate({
-    body: teacher,
+    body: professor,
   }),
-  TeacherController.update
+  ProfessorController.update
 );
+
+routes.put('/professor/delete', auth, ProfessorController.delete);
 
 //////////////////////////////////////////////////////////////////////
 
@@ -108,11 +104,13 @@ routes.post(
 routes.put(
   '/student',
   auth,
-  // authEmail, depois validar o email quando o usuário for atualizar
+  authEmailUpdate,
   celebrate({
     body: student,
   }),
   StudentController.update
 );
+
+routes.put('/student/delete', auth, StudentController.delete);
 
 module.exports = routes;

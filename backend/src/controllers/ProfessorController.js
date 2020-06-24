@@ -1,28 +1,28 @@
 const connection = require('../database/connection');
-// const GenerateToken = require('../utils/GenerateToken');
 
 module.exports = {
   async index(request, response) {
     try {
       const rows = await connection('person')
-        .join('professor', 'professor.person', '=', 'person.id')
+        .join('professor', 'professor.id_person', '=', 'person.id')
+        .where('professor.delete', false)
         .select(
-          'person.id',
-          'professor.matricula',
-          'person.tipo',
-          'person.nome',
+          'person.type',
+          'person.name',
+          'person.surname',
+          'professor.registration',
           'person.cpf',
           'person.rg',
-          'person.telefone',
-          'person.celular',
+          'person.telephone',
+          'person.cellPhone',
           'person.email',
           'person.cep',
           'person.uf',
-          'person.cidade',
-          'person.bairro',
-          'person.rua',
-          'person.numero',
-          'person.complemento'
+          'person.city',
+          'person.neighborhood',
+          'person.street',
+          'person.number',
+          'person.complement'
         );
 
       return response.status(200).json(rows);
@@ -36,26 +36,28 @@ module.exports = {
   async getMyData(request, response) {
     try {
       const id = request.id;
-      const rows = await connection('pessoa')
-        .join('professor', 'professor.id_pessoa', '=', 'pessoa.id')
+      const rows = await connection('person')
+        .join('professor', 'professor.id_person', '=', 'person.id')
         .where('professor.id', id)
+        .where('professor.delete', false)
         .select(
-          'pessoa.id',
-          'professor.matricula',
-          'pessoa.tipo',
-          'pessoa.nome',
-          'pessoa.cpf',
-          'pessoa.rg',
-          'pessoa.telefone',
-          'pessoa.celular',
-          'pessoa.email',
-          'pessoa.cep',
-          'pessoa.uf',
-          'pessoa.cidade',
-          'pessoa.bairro',
-          'pessoa.rua',
-          'pessoa.numero',
-          'pessoa.complemento'
+          'professor.id',
+          'person.type',
+          'person.name',
+          'person.surname',
+          'professor.registration',
+          'person.cpf',
+          'person.rg',
+          'person.telephone',
+          'person.cellPhone',
+          'person.email',
+          'person.cep',
+          'person.uf',
+          'person.city',
+          'person.neighborhood',
+          'person.street',
+          'person.number',
+          'person.complement'
         );
 
       return response.status(200).json(rows);
@@ -69,50 +71,47 @@ module.exports = {
   async create(request, response) {
     try {
       const {
-        matricula,
-        tipo,
-        nome,
+        registration,
+        type,
+        name,
+        surname,
         cpf,
         rg,
-        telefone,
-        celular,
+        telephone,
+        cellPhone,
         email,
         cep,
         uf,
-        cidade,
-        bairro,
-        rua,
-        numero,
-        complemento,
-        senha,
+        city,
+        neighborhood,
+        street,
+        number,
+        complement,
+        password,
       } = request.body;
 
-      const [id_pessoa] = await connection('pessoa').insert({
-        tipo,
-        nome,
+      const [id_person] = await connection('person').insert({
+        type,
+        name,
+        surname,
         cpf,
         rg,
-        telefone,
-        celular,
+        telephone,
+        cellPhone,
         email,
         cep,
         uf,
-        cidade,
-        bairro,
-        rua,
-        numero,
-        complemento,
-        senha,
+        city,
+        neighborhood,
+        street,
+        number,
+        complement,
+        password,
       });
       await connection('professor').insert({
-        id_pessoa,
-        matricula,
+        id_person,
+        registration,
       });
-
-      // const token = GenerateToken({
-      //   id: id_professor,
-      //   tipo: tipo,
-      // });
 
       return response
         .status(201)
@@ -128,56 +127,88 @@ module.exports = {
     try {
       const id = request.id;
       const {
-        matricula,
-        tipo,
-        nome,
+        registration,
+        type,
+        name,
+        surname,
         cpf,
         rg,
-        telefone,
-        celular,
+        telephone,
+        cellPhone,
         email,
         cep,
         uf,
-        cidade,
-        bairro,
-        rua,
-        numero,
-        complemento,
-        senha,
+        city,
+        neighborhood,
+        street,
+        number,
+        complement,
+        password,
       } = request.body;
 
-      const id_pessoa_professor = await connection('professor')
+      const id_person_professor = await connection('professor')
         .where('professor.id', id)
-        .select('id_pessoa')
+        .select('id_person')
         .first();
 
-      await connection('pessoa')
-        .where('pessoa.id', id_pessoa_professor.id_pessoa)
+      await connection('person')
+        .where('person.id', id_person_professor.id_person)
         .update({
-          tipo,
-          nome,
+          type,
+          name,
+          surname,
           cpf,
           rg,
-          telefone,
-          celular,
+          telephone,
+          cellPhone,
           email,
           cep,
           uf,
-          cidade,
-          bairro,
-          rua,
-          numero,
-          complemento,
-          senha,
+          city,
+          neighborhood,
+          street,
+          number,
+          complement,
+          password,
         });
 
       await connection('professor').where('professor.id', id).update({
-        matricula,
+        registration,
       });
 
       return response
         .status(200)
         .json({ status: 'success', message: 'user updated' });
+    } catch (error) {
+      return response
+        .status(500)
+        .json({ message: 'internal server error', error: error });
+    }
+  },
+  async delete(request, response) {
+    try {
+      const { id } = request.body;
+      const type = request.type;
+
+      if (type === 'superUser') {
+        const id_person_professor = await connection('professor')
+          .select('id_person')
+          .where('professor.id', id)
+          .first();
+
+        await connection('person')
+          .where('person.id', id_person_professor.id_person)
+          .update({
+            delete: true,
+          });
+
+        return response
+          .status(200)
+          .json({ status: 'success', message: 'user deleted' });
+      }
+      return response
+        .status(401)
+        .json({ status: 'error', message: 'bad credentials' });
     } catch (error) {
       return response
         .status(500)

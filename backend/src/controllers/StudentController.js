@@ -4,26 +4,29 @@ const connection = require('../database/connection');
 module.exports = {
   async index(request, response) {
     try {
-      const rows = await connection('pessoa')
-        .join('aluno', 'aluno.id_pessoa', '=', 'pessoa.id')
+      const rows = await connection('person')
+        .join('student', 'student.id_person', '=', 'person.id')
+        .where('student.delete', false)
         .select(
-          'pessoa.id',
-          'aluno.ra',
-          'aluno.periodo',
-          'pessoa.tipo',
-          'pessoa.nome',
-          'pessoa.cpf',
-          'pessoa.rg',
-          'pessoa.telefone',
-          'pessoa.celular',
-          'pessoa.email',
-          'pessoa.cep',
-          'pessoa.uf',
-          'pessoa.cidade',
-          'pessoa.bairro',
-          'pessoa.rua',
-          'pessoa.numero',
-          'pessoa.complemento'
+          'student.id',
+          'student.id_person',
+          'person.type',
+          'person.name',
+          'person.surname',
+          'student.ra',
+          'student.period',
+          'person.cpf',
+          'person.rg',
+          'person.telephone',
+          'person.cellPhone',
+          'person.email',
+          'person.cep',
+          'person.uf',
+          'person.city',
+          'person.neighborhood',
+          'person.street',
+          'person.number',
+          'person.complement'
         );
 
       return response.status(200).json(rows);
@@ -37,27 +40,30 @@ module.exports = {
   async getMyData(request, response) {
     try {
       const id = request.id;
-      const rows = await connection('pessoa')
-        .join('aluno', 'aluno.id_pessoa', '=', 'pessoa.id')
-        .where('aluno.id', id)
+      const rows = await connection('person')
+        .join('student', 'student.id_person', '=', 'person.id')
+        .where('student.id', id)
+        .where('student.delete', false)
         .select(
-          'pessoa.id',
-          'aluno.ra',
-          'aluno.periodo',
-          'pessoa.tipo',
-          'pessoa.nome',
-          'pessoa.cpf',
-          'pessoa.rg',
-          'pessoa.telefone',
-          'pessoa.celular',
-          'pessoa.email',
-          'pessoa.cep',
-          'pessoa.uf',
-          'pessoa.cidade',
-          'pessoa.bairro',
-          'pessoa.rua',
-          'pessoa.numero',
-          'pessoa.complemento'
+          'student.id',
+          'student.id_person',
+          'person.type',
+          'person.name',
+          'person.surname',
+          'student.ra',
+          'student.period',
+          'person.cpf',
+          'person.rg',
+          'person.telephone',
+          'person.cellPhone',
+          'person.email',
+          'person.cep',
+          'person.uf',
+          'person.city',
+          'person.neighborhood',
+          'person.street',
+          'person.number',
+          'person.complement'
         );
 
       return response.status(200).json(rows);
@@ -72,51 +78,48 @@ module.exports = {
     try {
       const {
         ra,
-        periodo,
-        tipo,
-        nome,
+        period,
+        type,
+        name,
+        surname,
         cpf,
         rg,
-        telefone,
-        celular,
+        telephone,
+        cellPhone,
         email,
         cep,
         uf,
-        cidade,
-        bairro,
-        rua,
-        numero,
-        complemento,
-        senha,
+        city,
+        neighborhood,
+        street,
+        number,
+        complement,
+        password,
       } = request.body;
 
-      const [id_pessoa] = await connection('pessoa').insert({
-        tipo,
-        nome,
+      const [id_person] = await connection('person').insert({
+        type,
+        name,
+        surname,
         cpf,
         rg,
-        telefone,
-        celular,
+        telephone,
+        cellPhone,
         email,
         cep,
         uf,
-        cidade,
-        bairro,
-        rua,
-        numero,
-        complemento,
-        senha,
+        city,
+        neighborhood,
+        street,
+        number,
+        complement,
+        password,
       });
-      await connection('aluno').insert({
-        id_pessoa,
+      await connection('student').insert({
+        id_person,
         ra,
-        periodo,
+        period,
       });
-
-      // const token = GenerateToken({
-      //   id: id_professor,
-      //   tipo: tipo,
-      // });
 
       return response
         .status(201)
@@ -133,57 +136,89 @@ module.exports = {
       const id = request.id;
       const {
         ra,
-        periodo,
-        tipo,
-        nome,
+        period,
+        type,
+        name,
+        surname,
         cpf,
         rg,
-        telefone,
-        celular,
+        telephone,
+        cellPhone,
         email,
         cep,
         uf,
-        cidade,
-        bairro,
-        rua,
-        numero,
-        complemento,
-        senha,
+        city,
+        neighborhood,
+        street,
+        number,
+        complement,
+        password,
       } = request.body;
 
-      const id_pessoa_aluno = await connection('aluno')
-        .where('aluno.id', id)
-        .select('id_pessoa')
+      const id_person_student = await connection('student')
+        .where('student.id', id)
+        .select('id_person')
         .first();
 
-      await connection('pessoa')
-        .where('pessoa.id', id_pessoa_aluno.id_pessoa)
+      await connection('person')
+        .where('person.id', id_person_student.id_person)
         .update({
-          tipo,
-          nome,
+          type,
+          name,
+          surname,
           cpf,
           rg,
-          telefone,
-          celular,
+          telephone,
+          cellPhone,
           email,
           cep,
           uf,
-          cidade,
-          bairro,
-          rua,
-          numero,
-          complemento,
-          senha,
+          city,
+          neighborhood,
+          street,
+          number,
+          complement,
+          password,
         });
 
-      await connection('aluno').where('aluno.id', id).update({
+      await connection('student').where('student.id', id).update({
         ra,
-        periodo,
+        period,
       });
 
       return response
         .status(200)
         .json({ status: 'success', message: 'user updated' });
+    } catch (error) {
+      return response
+        .status(500)
+        .json({ message: 'internal server error', error: error });
+    }
+  },
+  async delete(request, response) {
+    try {
+      const { id } = request.body;
+      const type = request.type;
+
+      if (type === 'superUser') {
+        const id_person_student = await connection('student')
+          .select('id_person')
+          .where('student.id', id)
+          .first();
+
+        await connection('person')
+          .where('person.id', id_person_student.id_person)
+          .update({
+            delete: true,
+          });
+
+        return response
+          .status(200)
+          .json({ status: 'success', message: 'user deleted' });
+      }
+      return response
+        .status(401)
+        .json({ status: 'error', message: 'bad credentials' });
     } catch (error) {
       return response
         .status(500)

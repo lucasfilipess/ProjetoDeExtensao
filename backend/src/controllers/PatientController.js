@@ -40,7 +40,7 @@ module.exports = {
       const id = request.id;
       const rows = await connection('person')
         .join('patient', 'patient.id_person', '=', 'person.id')
-        .where('patient.id', id, 'patient.delete', false)
+        .where('patient.id', id)
         .select(
           'person.type',
           'person.name',
@@ -186,7 +186,6 @@ module.exports = {
   async delete(request, response) {
     try {
       const id = request.id;
-
       const id_person_patient = await connection('patient')
         .select('id_person')
         .where('patient.id', id)

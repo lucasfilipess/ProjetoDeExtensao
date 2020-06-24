@@ -14,7 +14,7 @@ module.exports = (request, response, next) => {
       return response.status(401).send({ error: 'token invalid' });
     }
     request.id = decoded.id;
-    request.tipo = decoded.tipo;
+    request.type = decoded.type;
     return next();
   });
 };

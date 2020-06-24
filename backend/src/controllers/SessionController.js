@@ -4,10 +4,10 @@ const GenerateToken = require('../utils/GenerateToken');
 module.exports = {
   async login(request, response) {
     try {
-      const { email, senha } = request.body;
+      const { email, password } = request.body;
 
-      const rows = await connection('pessoa')
-        .select('nome', 'tipo', 'id', 'senha')
+      const rows = await connection('person')
+        .select('name', 'id', 'type', 'password')
         .where('email', email)
         .first();
 
@@ -15,13 +15,13 @@ module.exports = {
         return response.status(404).json({ msg: 'bad credentials' });
       }
 
-      if (senha === rows.senha) {
-        const [user] = await connection('paciente')
+      if (password === rows.password) {
+        const [user] = await connection('patient')
           .select('id')
-          .where('id_pessoa', rows.id);
+          .where('id_person', rows.id);
         const token = GenerateToken({
           id: user.id,
-          tipo: rows.tipo,
+          type: rows.type,
         });
         return response.status(200).json({ token, name: rows.nome });
       } else {
@@ -36,10 +36,9 @@ module.exports = {
 
   async adminLogin(request, response) {
     try {
-      const { email, senha } = request.body;
-
-      const rows = await connection('pessoa')
-        .select('nome', 'tipo', 'id', 'senha')
+      const { email, password } = request.body;
+      const rows = await connection('person')
+        .select('name', 'type', 'id', 'password')
         .where('email', email)
         .first();
 
@@ -47,20 +46,20 @@ module.exports = {
         return response.status(404).json({ msg: 'bad credentials' });
       }
 
-      if (senha === rows.senha) {
+      if (password === rows.password) {
         let user;
-        if (rows.tipo === 1) {
+        if (rows.type === 'professor') {
           [user] = await connection('professor')
             .select('id')
-            .where('id_pessoa', rows.id);
-        } else if (rows.tipo === 2) {
-          [user] = await connection('aluno')
+            .where('id_person', rows.id);
+        } else if (rows.type === 'student') {
+          [user] = await connection('student')
             .select('id')
-            .where('id_pessoa', rows.id);
+            .where('id_person', rows.id);
         }
         const token = GenerateToken({
           id: user.id,
-          tipo: rows.tipo,
+          type: rows.type,
         });
 
         return response

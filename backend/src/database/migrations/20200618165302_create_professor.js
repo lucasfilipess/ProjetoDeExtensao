@@ -4,7 +4,7 @@ exports.up = function (knex) {
     table.integer('id_person').notNullable();
     table.integer('registration').notNullable();
     table.boolean('delete').defaultTo(false).notNullable();
-    table.foreign('id_person').references('id').inTable('pessoa');
+    table.foreign('id_person').references('id').inTable('person');
   });
 };
 
