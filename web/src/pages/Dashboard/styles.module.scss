@@ -1,22 +1,40 @@
 .container{
     background: #F2F2F2;
+    
 }
     .Boxes{
         display: flex; 
         justify-content: space-around;
         padding-top: 1%;
-        border: 0px, 50px, 50px, 0px;
+        color:  #3F51B5;
         div{
-            display: flex;  
             height: 152px;
             width: 377px;
             background: #FFFFFF;
             border: 1px solid rgba(63, 63, 68, 0.005);
             box-shadow: 0px 1px 3px rgba(63, 63, 68, 0.15), 0px 1px 0px rgba(63, 63, 68, 0.05);
             border-radius: 4px;
+            padding: 20px;
+            font-size: 17px;
         }
-        :last-child{
+        h2{
+            color: black;
+            padding-bottom: 10px;
+        }
+        .BlueBox{
             background: #3F51B5;
+            color: #F2F2F2;
+            h2{
+                color: #F2F2F2;
+            }
+            p{
+                text-decoration: underline;
+            }
+        }
+        img{
+            height: 55px;
+            width: 91px; 
+            float: right;                       
         }
     }
 
@@ -26,22 +44,47 @@
         padding: 1%;
         div{
             background: #FFFFFF;
-            border: 1px solid rgba(63, 63, 68, 0.005);
             box-shadow: 0px 1px 3px rgba(63, 63, 68, 0.15), 0px 1px 0px rgba(63, 63, 68, 0.05);
             border-radius: 4px;
-            padding: 10px;
         }
-        .Graphic{
+        .Warnings{
             display: flex;  
             height: 545px;
             width: 1191px;
-            
+            justify-content: center;
+            img{ 
+                height: 545px;
+                width: 1191px;
+                border-radius: 4px;
+            }
+            p{
+                padding-top: 60px;
+                position: absolute;
+                font-size: 30px;
+                font-weight: bolder;
+                color: #0f111f; 
+            }            
         }   
+        .Arrow{
+            position: absolute;   
+            display: flex;
+            background: none;
+            box-shadow: none;
+            flex-flow: initial;
+            img{
+            height:40px;
+            width: 40px;
+            }
+        }
+
         .Calendar{
             display: flex;  
             height: 545px;
             width: 377px;
+            
             img{
+                padding-top: 15px;
+                padding-left: 17px;
                 height: 520px;
                 width: 355px;
             }
@@ -57,20 +100,59 @@
             box-shadow: 0px 1px 3px rgba(63, 63, 68, 0.15), 0px 1px 0px rgba(63, 63, 68, 0.05);
             border-radius: 4px;
             padding: 10px;
+            
         }
-        .Products{ 
+        .SocialMedia{ 
             display: flex;  
             height: 518px;
-            width: 377px;
+            width: 377px;    
+            
+            justify-content: center;
+            img{
+                display: flex;
+                height: 250px;
+                width: 270px;
+            }
+            button{
+                position: absolute;
+                color: #F2F2F2; 
+
+                background-color:#3F51B5;
+                border: none;
+                border-radius: 4px;
+                padding: 15px 5px;
+                text-align: center;
+                text-decoration: none;
+                font-size: 16px;
+                margin: 270px 2px;
+                cursor: pointer;
+            }
                 
-        }   
-        .Orders{
-            display: flex;  
+        }  
+        .SocialMediaIcons {
+            position: absolute;
+            display: flex;
+            align-self: flex-end;                      
+            background: none;
+            box-shadow: none;
+          
+            justify-content: space-between;
+            img{                
+                display: flex;
+                justify-content: space-between;
+                height: 50px;
+                width: 50px;
+            }
+        }
+        .Graphic{ 
             height: 518px;
             width: 1193px;
+            img{              
+                height: 500px;
+                width: 1193px;
+            }
         }    
     
 }
 
 
- 
