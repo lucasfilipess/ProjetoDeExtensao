@@ -23,6 +23,7 @@ import {
   RiDashboardLine,
   RiSettings4Line,
   RiQuestionLine,
+  RiHandHeartLine,
 } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 
@@ -64,11 +65,11 @@ function Layout({ children, activeTab }) {
               <p>Dashboard</p>
             </Link>
             <Link
-              to="/home"
+              to="/home/service-area"
               className={activeTab === 2 ? ActiveItemMenu : ItemMenu}
             >
-              <RiQuestionLine className={MenuIcon} />
-              <p>Algum menu</p>
+              <RiHandHeartLine className={MenuIcon} />
+              <p>Atendimento</p>
             </Link>
             <Link
               to="/home"
