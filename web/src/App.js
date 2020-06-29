@@ -22,14 +22,18 @@ const LoadableServiceArea = Loadable({
 });
 
 function App() {
-<<<<<<< HEAD
   const [isActive, setIsActive] = useState(0);
-=======
-  const [isActive, setIsActive] = useState(null);
->>>>>>> origin/development_service_area
 
   return (
-    <Layout activeTab={isActive}>
+    <Layout
+      tab1={'/home'}
+      tab2={'/home/service-area'}
+      tab3={'/home'}
+      tab4={'/home'}
+      tab5={'/home'}
+      tab6={'/home/settings'}
+      activeTab={isActive}
+    >
       <Switch>
         <Route
           exact

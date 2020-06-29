@@ -2,12 +2,13 @@
   align-items: center;
   background-color: #3f51b5;
   display: flex;
-  height: 64px;
+  height: 54px;
   justify-content: space-between;
   padding: 0 33px 0 24px;
   width: 100%;
   .LogoContainer {
   }
+
   .NavButtons {
     align-items: center;
     display: flex;
@@ -22,14 +23,14 @@
     border: 1px solid rgba(63, 63, 68, 0.005);
     box-shadow: 0px 1px 3px rgba(63, 63, 68, 0.15),
       0px 1px 0px rgba(63, 63, 68, 0.05);
-    height: calc(100vh - 64px);
+    height: calc(100vh - 54px);
     width: 270px;
     .ProfileSection {
       align-items: center;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      height: 204px;
+      height: 180px;
       width: 100%;
       img {
         border-radius: 100%;
@@ -57,7 +58,7 @@
       margin: 0 16px;
     }
     .Menus {
-      padding: 24px 16px;
+      padding: 10px 16px;
       width: 100%;
       .ItemMenu {
         align-items: center;
@@ -115,9 +116,12 @@
           margin-left: 10px;
         }
       }
+      :last-child {
+        margin-bottom: 0;
+      }
     }
     .SupportSection {
-      padding: 24px 16px;
+      padding: 10px 16px;
       width: 100%;
       .SupportTitle {
         color: rgba(0, 0, 0, 0.328974);
@@ -145,8 +149,133 @@
       }
     }
   }
+
+  .SideBarCollapse {
+    background: #ffffff;
+    border: 1px solid rgba(63, 63, 68, 0.005);
+    box-shadow: 0px 1px 3px rgba(63, 63, 68, 0.15),
+      0px 1px 0px rgba(63, 63, 68, 0.05);
+    height: calc(100vh - 54px);
+    width: 80px;
+    .ProfileSection {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 140px;
+      width: 100%;
+      img {
+        border-radius: 100%;
+        height: 50px;
+        width: 50px;
+      }
+      .ProfileName {
+        color: #3a3b3f;
+        font-size: 14px;
+        letter-spacing: -0.05px;
+        line-height: 10px;
+        margin-top: 10px;
+      }
+      .TypeUser {
+        color: #9ea0a5;
+        font-size: 12px;
+        line-height: 16px;
+        text-align: center;
+        // margin-top: 5px;
+      }
+    }
+    .BorderLine {
+      background: #e4e7eb;
+      height: 1px;
+      margin: 0 16px;
+    }
+    .Menus {
+      // padding: 24px 16px;
+      width: 100%;
+      .ItemMenu {
+        align-items: center;
+        display: flex;
+        height: 46px;
+        margin-bottom: 8px;
+        padding: 0 18px;
+        transition: background 0.2s, box-shadow 0.2s, border-radius 0.2s;
+        width: 100%;
+        .MenuIcon {
+          color: #66788a;
+          height: 25px;
+          width: 25px;
+          transition: color 0.2s;
+        }
+        p {
+          display: none;
+        }
+      }
+      .ItemMenu:hover {
+        background: #f6f9fd;
+        box-shadow: inset 3px 0px 0px #1665d8;
+        border-radius: 4px;
+        .MenuIcon {
+          color: #3f51b5;
+        }
+      }
+      .ActiveItemMenu {
+        align-items: center;
+        display: flex;
+        height: 46px;
+        margin-bottom: 8px;
+        padding: 0 18px;
+        background: #f6f9fd;
+        box-shadow: inset 3px 0px 0px #1665d8;
+        border-radius: 4px;
+        width: 100%;
+        .MenuIcon {
+          color: #3f51b5;
+          height: 25px;
+          width: 25px;
+          transition: color 0.2s;
+        }
+        p {
+          display: none;
+        }
+      }
+    }
+    .SupportSection {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      padding: 24px 16px;
+
+      width: 100%;
+      .SupportTitle {
+        color: rgba(0, 0, 0, 0.328974);
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 15px;
+        margin-bottom: 20px;
+      }
+      .SupportButton {
+        align-items: center;
+        display: flex;
+        svg {
+          color: #66788a;
+          height: 24px;
+          margin-right: 2px;
+          width: 24px;
+        }
+        p {
+          display: none;
+          color: #66788a;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 20px;
+          letter-spacing: -0.05px;
+        }
+      }
+    }
+  }
   .Content {
-    padding-bottom: 24px;
+    height: calc(100vh - 54px);
+    overflow-y: scroll;
     background-color: #f2f2f2;
     width: 100%;
   }

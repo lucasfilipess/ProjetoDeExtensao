@@ -17,6 +17,12 @@ body::-webkit-scrollbar {
   display: none;
   -ms-overflow-style: none;
 }
+
+div::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+}
+
 button {
   cursor: pointer;
   background: transparent;
