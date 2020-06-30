@@ -5,7 +5,7 @@ exports.seed = function (knex) {
       return knex('person').insert([
         {
           id: 1,
-          type: 'professor',
+          type: 'admin',
           name: 'José',
           surname: 'Carlos',
           cpf: 06011456335,
@@ -62,7 +62,7 @@ exports.seed = function (knex) {
         },
         {
           id: 4,
-          type: 'student',
+          type: 'professor',
           name: 'Ana',
           surname: 'Júlia',
           cpf: 05022134556,

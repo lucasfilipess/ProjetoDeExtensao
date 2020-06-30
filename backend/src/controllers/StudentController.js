@@ -200,7 +200,7 @@ module.exports = {
       const { id } = request.body;
       const type = request.type;
 
-      if (type === 'superUser') {
+      if (type === 'admin') {
         const id_person_student = await connection('student')
           .select('id_person')
           .where('student.id', id)

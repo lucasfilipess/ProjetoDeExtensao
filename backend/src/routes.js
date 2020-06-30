@@ -24,13 +24,6 @@ routes.post(
   }),
   SessionController.login
 );
-routes.post(
-  '/admin/login',
-  celebrate({
-    body: login,
-  }),
-  SessionController.adminLogin
-);
 
 //////////////////////////////////////////////////////////////////////
 

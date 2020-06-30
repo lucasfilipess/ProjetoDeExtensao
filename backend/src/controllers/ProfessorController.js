@@ -2,11 +2,17 @@ const connection = require('../database/connection');
 
 module.exports = {
   async index(request, response) {
+    const type = 'professor';
     try {
       const rows = await connection('person')
         .join('professor', 'professor.id_person', '=', 'person.id')
+        .join('teaching', 'teaching.id_professor', '=', 'professor.id')
+        .join('class', 'class.id', '=', 'teaching.id_class')
+        .join('affiliation', 'affiliation.id_professor', '=', 'professor.id')
+        .join('advice', 'advice.id', '=', 'affiliation.id_advice')
         .where('professor.delete', false)
         .select(
+          'professor.id',
           'person.type',
           'person.name',
           'person.surname',
@@ -22,7 +28,13 @@ module.exports = {
           'person.neighborhood',
           'person.street',
           'person.number',
-          'person.complement'
+          'person.complement',
+          'teaching.id_class',
+          'class.name as class',
+          'affiliation.registration_date',
+          'affiliation.id_registration',
+          'advice.name as advice',
+          'advice.uf as advice_uf'
         );
 
       return response.status(200).json(rows);
@@ -188,19 +200,14 @@ module.exports = {
   async delete(request, response) {
     try {
       const { id } = request.body;
+      console.log(id);
       const type = request.type;
+      console.log(type);
 
-      if (type === 'superUser') {
-        const id_person_professor = await connection('professor')
-          .select('id_person')
-          .where('professor.id', id)
-          .first();
-
-        await connection('person')
-          .where('person.id', id_person_professor.id_person)
-          .update({
-            delete: true,
-          });
+      if (type === 'admin') {
+        await connection('professor').where('professor.id', id).update({
+          delete: true,
+        });
 
         return response
           .status(200)

@@ -19,7 +19,7 @@ module.exports = {
   async create(request, response) {
     try {
       const type = request.type;
-      if (type === 'superUser') {
+      if (type === 'admin') {
         const { name, description } = request.body;
 
         await connection('service_area').insert({
@@ -46,7 +46,7 @@ module.exports = {
     try {
       const type = request.type;
 
-      if (type === 'superUser') {
+      if (type === 'admin') {
         const { id, name, description } = request.body;
 
         await connection('service_area').where('service_area.id', id).update({
@@ -74,7 +74,7 @@ module.exports = {
       const type = request.type;
       const { id } = request.body;
 
-      if (type === 'superUser') {
+      if (type === 'admin') {
         await connection('service_area').where('service_area.id', id).update({
           delete: true,
         });

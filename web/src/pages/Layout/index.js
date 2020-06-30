@@ -18,26 +18,44 @@ import {
   SupportTitle,
   SupportButton,
   Content,
-  ColapseBtn,
 } from './styles.module.scss';
-
-import {
-  RiDashboardLine,
-  RiSettings4Line,
-  RiQuestionLine,
-  RiHandHeartLine,
-} from 'react-icons/ri';
-import { Link } from 'react-router-dom';
-
-import bell from '../../assets/images/bell.svg';
-import logout from '../../assets/images/logout.svg';
-import profile from '../../assets/images/user.svg';
+import { RiQuestionLine } from 'react-icons/ri';
+import { Link, useHistory } from 'react-router-dom';
+import bell from '../../Assets/images/bell.svg';
+import logout from '../../Assets/images/logout.svg';
+import profile from '../../Assets/images/user.svg';
 import { AiOutlineMenuFold, AiOutlineMenuUnfold } from 'react-icons/ai';
 
-function Layout({ children, activeTab, tab1, tab2, tab3, tab4, tab5, tab6 }) {
+function Layout({
+  children,
+  activeTab,
+  link1,
+  link2,
+  link3,
+  link4,
+  link5,
+  link6,
+  name1,
+  name2,
+  name3,
+  name4,
+  name5,
+  name6,
+  icon1,
+  icon2,
+  icon3,
+  icon4,
+  icon5,
+  icon6,
+}) {
   const name = localStorage.getItem('name');
   const type = localStorage.getItem('type');
-  const [collapse, setCollapse] = useState(true);
+  const history = useHistory();
+  const [collapse, setCollapse] = useState(false);
+  function handleLogout() {
+    localStorage.clear();
+    history.push('/');
+  }
 
   return (
     <>
@@ -51,7 +69,7 @@ function Layout({ children, activeTab, tab1, tab2, tab3, tab4, tab5, tab6 }) {
           <button>
             <img src={bell} alt="notifications icon" />
           </button>
-          <button>
+          <button onClick={handleLogout}>
             <img src={logout} alt="logout icon" />
           </button>
         </div>
@@ -66,54 +84,70 @@ function Layout({ children, activeTab, tab1, tab2, tab3, tab4, tab5, tab6 }) {
           <div className={BorderLine}></div>
           <div className={Menus}>
             <Link
-              to={tab1}
+              to={link1}
               className={activeTab === 1 ? ActiveItemMenu : ItemMenu}
             >
-              <RiDashboardLine className={MenuIcon} />
-              <p>Dashboard</p>
+              <div className={MenuIcon}>
+                {/* <RiDashboardLine className={MenuIcon} /> */}
+                {icon1}
+              </div>
+              <p>{name1}</p>
             </Link>
             <Link
-              // to="/home/service-area"
-              to={tab2}
+              to={link2}
               className={activeTab === 2 ? ActiveItemMenu : ItemMenu}
             >
-              <RiHandHeartLine className={MenuIcon} />
-              <p>Atendimento</p>
+              <div className={MenuIcon}>
+                {/* <RiHandHeartLine className={MenuIcon} /> */}
+                {icon2}
+              </div>
+              <p>{name2}</p>
             </Link>
             <Link
-              to={tab3}
+              to={link3}
               className={activeTab === 3 ? ActiveItemMenu : ItemMenu}
             >
-              <RiQuestionLine className={MenuIcon} />
-              <p>Algum menu</p>
+              <div className={MenuIcon}>
+                {/* <RiQuestionLine className={MenuIcon} /> */}
+                {icon3}
+              </div>
+              <p>{name3}</p>
             </Link>
             <Link
-              to={tab4}
+              to={link4}
               className={activeTab === 4 ? ActiveItemMenu : ItemMenu}
             >
-              <RiQuestionLine className={MenuIcon} />
-              <p>Algum menu</p>
+              <div className={MenuIcon}>
+                {/* <RiQuestionLine className={MenuIcon} /> */}
+                {icon4}
+              </div>
+              <p>{name4}</p>
             </Link>
             <Link
-              to={tab5}
+              to={link5}
               className={activeTab === 5 ? ActiveItemMenu : ItemMenu}
             >
-              <RiQuestionLine className={MenuIcon} />
-              <p>Algum menu</p>
+              <div className={MenuIcon}>
+                {/* <RiQuestionLine className={MenuIcon} /> */}
+                {icon5}
+              </div>
+              <p>{name5}</p>
             </Link>
             <Link
-              // to="/home/settings"
-              to={tab6}
+              to={link6}
               className={activeTab === 6 ? ActiveItemMenu : ItemMenu}
             >
-              <RiSettings4Line className={MenuIcon} />
-              <p>Configurações</p>
+              <div className={MenuIcon}>
+                {/* <RiSettings4Line className={MenuIcon} /> */}
+                {icon6}
+              </div>
+              <p>{name6}</p>
             </Link>
           </div>
           <div className={BorderLine}></div>
           <div className={SupportSection}>
             <p className={SupportTitle}>Ajuda</p>
-            <Link to={tab1} className={SupportButton}>
+            <Link to="/" className={SupportButton}>
               <RiQuestionLine />
               <p>Suporte</p>
             </Link>
