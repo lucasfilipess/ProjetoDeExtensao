@@ -1,13 +1,13 @@
 exports.up = function (knex) {
-  return knex.schema.createTable('discord', function (table) {
+  return knex.schema.createTable('service_area', function (table) {
     table.increments('id').primary();
     table.integer('id_class').notNullable();
-    table.integer('id_student').notNullable();
+    table.string('name', 100).notNullable();
+    table.string('description').notNullable();
     table.foreign('id_class').references('id').inTable('class');
-    table.foreign('id_student').references('id').inTable('student');
   });
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropTable('discord');
+  return knex.schema.dropTable('service_area');
 };

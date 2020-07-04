@@ -3,7 +3,7 @@ exports.up = function (knex) {
     table.increments('id').primary();
     table.string('name', 100).notNullable();
     table.integer('duration', 2).notNullable();
-    table.string('shift').notNullable();
+    table.integer('campus', 30).notNullable();
   });
 };
 exports.down = function (knex) {

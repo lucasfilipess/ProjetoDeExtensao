@@ -2,42 +2,46 @@ const express = require('express');
 const { celebrate } = require('celebrate');
 const routes = express.Router();
 const auth = require('./middlewares/auth');
+const isAdmin = require('./middlewares/isAdmin');
 const authEmail = require('./middlewares/authEmail');
 const authEmailUpdate = require('./middlewares/authEmailUpdate');
 const {
-  login,
-  patient,
-  professor,
-  student,
-  completePatient,
+  login_schema,
+  person_schema,
+  patient_schema,
+  accompanied_schema,
+  supervisor_update_schema,
+  supervisor_schema,
+  student_schema,
 } = require('./middlewares/schemas');
 
-const SessionController = require('./controllers/SessionController');
-const PatientController = require('./controllers/PatientController');
-const ProfessorController = require('./controllers/ProfessorController');
-const StudentController = require('./controllers/StudentController');
+const session = require('./controllers/SessionController');
+const patient = require('./controllers/PatientController');
+const supervisor = require('./controllers/SupervisorController');
+const admin = require('./controllers/AdminController');
 
 routes.post(
   '/login',
   celebrate({
-    body: login,
+    body: login_schema,
   }),
-  SessionController.login
+  session.login
 );
 
 //////////////////////////////////////////////////////////////////////
 
-routes.get('/patient', PatientController.index);
+routes.get('/patient', patient.index);
 
-routes.get('/patient/my-data', auth, PatientController.getMyData);
+routes.get('/patient/my-data', auth, patient.getMyData);
+routes.get('/patient/my-accompanied', auth, patient.getMyAccompanied);
 
 routes.post(
   '/patient',
   authEmail,
   celebrate({
-    body: patient,
+    body: patient_schema,
   }),
-  PatientController.create
+  patient.create
 );
 
 routes.put(
@@ -45,65 +49,96 @@ routes.put(
   auth,
   authEmailUpdate,
   celebrate({
-    body: completePatient,
+    body: person_schema,
   }),
-  PatientController.update
+  patient.update
 );
 
-routes.put('/patient/delete', auth, PatientController.delete);
-
-//////////////////////////////////////////////////////////////////////
-
-routes.get('/professor', ProfessorController.index);
-
-routes.get('/professor/my-data', auth, ProfessorController.getMyData);
+routes.delete('/patient', auth, patient.delete);
 
 routes.post(
-  '/professor',
-  authEmail,
+  '/patient/accompanied',
+  auth,
   celebrate({
-    body: professor,
+    body: accompanied_schema,
   }),
-  ProfessorController.create
+  patient.createAccompanied
 );
 
 routes.put(
-  '/professor',
+  '/patient/accompanied/:id',
   auth,
-  authEmailUpdate,
   celebrate({
-    body: professor,
+    body: accompanied_schema,
   }),
-  ProfessorController.update
+  patient.updateAccompanied
 );
 
-routes.put('/professor/delete', auth, ProfessorController.delete);
+routes.delete('/patient/accompanied/:id', auth, patient.deleteAccompanied);
 
 //////////////////////////////////////////////////////////////////////
 
-routes.get('/student', StudentController.index);
+routes.get('/supervisor', supervisor.index);
 
-routes.get('/student/my-data', auth, StudentController.getMyData);
-
-routes.post(
-  '/student',
-  authEmail,
-  celebrate({
-    body: student,
-  }),
-  StudentController.create
-);
+routes.get('/supervisor/my-data', auth, supervisor.getMyData);
+routes.get('/supervisor/my-appointments', auth, supervisor.getMyAppointments);
 
 routes.put(
-  '/student',
+  '/supervisor',
   auth,
   authEmailUpdate,
   celebrate({
-    body: student,
+    body: supervisor_update_schema,
   }),
-  StudentController.update
+  supervisor.update
 );
 
-routes.put('/student/delete', auth, StudentController.delete);
+// //////////////////////////////////////////////////////////////////////
+
+routes.get('/admin', admin.index);
+
+routes.post(
+  'admin/supervisor',
+  isAdmin,
+  authEmail,
+  celebrate({
+    body: supervisor_schema,
+  }),
+  admin.createSupervisor
+);
+
+routes.put(
+  'admin/supervisor',
+  isAdmin,
+  authEmail,
+  celebrate({
+    body: supervisor_schema,
+  }),
+  admin.updateSupervisor
+);
+
+routes.delete('admin/supervisor', isAdmin, admin.deleteSupervisor);
+
+routes.post(
+  'admin/student',
+  isAdmin,
+  authEmail,
+  celebrate({
+    body: student_schema,
+  }),
+  admin.createStudent
+);
+
+routes.put(
+  'admin/student',
+  isAdmin,
+  authEmail,
+  celebrate({
+    body: student_schema,
+  }),
+  admin.updateStudent
+);
+
+routes.delete('admin/student', isAdmin, admin.deleteStudent);
 
 module.exports = routes;

@@ -4,11 +4,12 @@ exports.up = function (knex) {
     table.string('type').notNullable();
     table.string('name', 30).notNullable();
     table.string('surname', 30).notNullable();
+    table.string('birth_date', 10);
     table.string('cpf', 14);
     table.string('rg', 13);
     table.string('telephone', 14);
     table.string('cellPhone', 16);
-    table.string('email').notNullable();
+    table.string('email');
     table.string('cep', 9);
     table.string('uf', 2);
     table.string('city', 100);
@@ -16,7 +17,7 @@ exports.up = function (knex) {
     table.string('street', 100);
     table.integer('number');
     table.string('complement');
-    table.string('password').notNullable();
+    table.string('password');
   });
 };
 
