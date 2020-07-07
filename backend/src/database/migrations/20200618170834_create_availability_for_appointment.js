@@ -7,6 +7,7 @@ exports.up = function (knex) {
     table.integer('id_service_area').notNullable();
     table.date('date').notNullable();
     table.specificType('hourly', 'text[]');
+    table.bolean('has_patient').defaultTo(false).notNullable();
 
     table.foreign('id_supervisor').references('id').inTable('supervisor');
     table.foreign('id_service_area').references('id').inTable('service_area');
