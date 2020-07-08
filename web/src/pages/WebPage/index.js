@@ -10,13 +10,17 @@ function WebPage() {
         <div className={Banner} style={{ backgroundImage: `url(${HomeBanner})` }} >     
           <div className={Content}>
             <h1>Clínica UniBH</h1>
-            <p>Mussum Ipsum, cacilds vidis litro abertis. Si num tem leite então bota 
-              uma pinga aí cumpadi! Praesent vel viverra nisi. Mauris aliquet nunc non 
-              turpis scelerisque, eget. Nullam volutpat risus nec leo commodo, ut interdum 
-              diam laoreet. Sed non consequat odio. Posuere libero varius. Nullam a nisl 
-              ut ante blandit hendrerit. Aenean sit amet nisi. In elementis mé pra quem 
-              é amistosis quis leo. Interagi no mé, cursus quis, vehicula ac nisi. Nec 
-              orci ornare consequat.
+            <p>Considerado o Melhor Centro Universitário privado de Belo Horizonte, 
+            após a divulgação do IGC (Índice Geral de Cursos), em dezembro de 2019 pelo 
+            Ministério da Educação (MEC – ENADE 2018), o UniBH é uma das mais tradicionais 
+            instituições de ensino de Belo Horizonte, com mais de 50 anos de atuação na cidade. 
+            É uma escola aberta e próxima da comunidade. Referência quando o assunto é qualidade
+             acadêmica e extensão universitária, a instituição oferece projetos inovadores que 
+             integram ensino, pesquisa e extensão, aliados a uma estrutura física completa e
+              moderna. Consciente de seu papel social, o UniBH estabelece parcerias com a 
+              comunidade e desenvolve ações que beneficiam especialmente a população carente, 
+              com mais de mil atendimentos mensais prestados gratuitamente, além de importantes 
+              projetos ligados à sustentabilidade.
             </p>
             <div className={Buttons}>
               <button>Cadastre-se</button>
@@ -35,12 +39,12 @@ function WebPage() {
           <div>
             <h2>Agende sua consulta</h2>
             <p>Aqui no site em qualquer data ou horario,
-               ou pelo telefone (31) 3030-3030 de segunda à sexta de 08:00 as 18:00.</p>
+               ou pelo telefone.</p>
           </div>
           <div>
-            <h2>Mussum Ipsum</h2>
-            <p>Mussum Ipsum, cacilds vidis litro abertis. Si num tem leite então bota uma 
-              pinga aí cumpadi! Praesent vel viverra nisi. Mauris aliquet nunc non turpis scelerisque, eget.</p>
+           <h2>Contato</h2>
+            <p>(31)3319-9509 e (31)3319-9345</p>
+            <p>Horário de atendimento das consultas: 7h40 às 18h</p>
           </div>
         </div>
         </div>
