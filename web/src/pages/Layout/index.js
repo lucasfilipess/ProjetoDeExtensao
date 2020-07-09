@@ -49,7 +49,14 @@ function Layout({
   icon6,
 }) {
   const name = localStorage.getItem('name');
-  const type = localStorage.getItem('type');
+  let type = '';
+  if (localStorage.getItem('type') === 'patient') {
+    type = 'Paciente';
+  } else if (localStorage.getItem('type') === 'supervisor') {
+    type = 'Supervisor';
+  } else {
+    type = 'Administrador';
+  }
   const history = useHistory();
   const [collapse, setCollapse] = useState(false);
   function handleLogout() {

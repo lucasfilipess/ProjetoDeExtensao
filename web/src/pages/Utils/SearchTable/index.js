@@ -19,6 +19,9 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import Update from '../../Admin/Professor/Update';
+import UpdateAccompanied from '../../Patient/Accompanied/Update';
+import UpdateClass from '../../Admin/Class/Update';
+import UpdateServiceArea from '../../Admin/ServiceArea/Update';
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -53,7 +56,10 @@ export default function MaterialTableDemo({
   deleteBtn,
   handleUpdate,
   student,
-  professor,
+  patient,
+  supervisor,
+  classData,
+  serviceArea,
 }) {
   const [state, setState] = useState({
     columns: columnsName,
@@ -81,7 +87,7 @@ export default function MaterialTableDemo({
             onClick: (event, rows) => {
               deleteBtn(
                 window.confirm(`Deseja desativar ${rows.name} do sistema ?`),
-                rows.id
+                patient ? rows.id_accompanying : rows.id
               );
             },
           },
@@ -91,7 +97,14 @@ export default function MaterialTableDemo({
             tooltip: 'Editar',
             icon: EditIcon,
             render: (rows) => {
-              return <>{professor && <Update data={rows} />}</>;
+              return (
+                <>
+                  {supervisor && <Update data={rows} />}
+                  {patient && <UpdateAccompanied data={rows} />}
+                  {classData && <UpdateClass data={rows} />}
+                  {serviceArea && <UpdateServiceArea data={rows} />}
+                </>
+              );
             },
           },
         ]}

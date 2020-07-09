@@ -8,6 +8,7 @@ import {
   RiSettings4Line,
   RiHandHeartLine,
 } from 'react-icons/ri';
+import { FaHandsHelping } from 'react-icons/fa';
 const LoadableDashboard = Loadable({
   loader: () => import('./Pages/Patient/Dashboard'),
   loading: Loader,
@@ -21,6 +22,10 @@ const LoadableServiceArea = Loadable({
   loader: () => import('./Pages/Patient/ServiceArea'),
   loading: Loader,
 });
+const LoadableAccompanied = Loadable({
+  loader: () => import('./Pages/Patient/Accompanied'),
+  loading: Loader,
+});
 
 function App() {
   const [isActive, setIsActive] = useState(0);
@@ -29,13 +34,16 @@ function App() {
     <Layout
       link1={'/patient'}
       link2={'/patient/service-area'}
-      link3={'/patient/settings'}
+      link3={'/patient/accompanied'}
+      link4={'/patient/settings'}
       name1={'Dashboard'}
       name2={'Atendimento'}
-      name3={'Configurações'}
+      name3={'Acompanhante'}
+      name4={'Configurações'}
       icon1={<RiDashboardLine />}
       icon2={<RiHandHeartLine />}
-      icon3={<RiSettings4Line />}
+      icon3={<FaHandsHelping />}
+      icon4={<RiSettings4Line />}
       activeTab={isActive}
     >
       <Switch>
@@ -56,6 +64,12 @@ function App() {
           path="/patient/service-area"
           render={(props) => (
             <LoadableServiceArea {...props} setIsActive={setIsActive} />
+          )}
+        />
+        <Route
+          path="/patient/accompanied"
+          render={(props) => (
+            <LoadableAccompanied {...props} setIsActive={setIsActive} />
           )}
         />
       </Switch>

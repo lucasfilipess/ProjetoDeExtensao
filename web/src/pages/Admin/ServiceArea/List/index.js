@@ -8,61 +8,50 @@ import { Route, Switch } from 'react-router-dom';
 function List({ setIsLinkActive }) {
   useEffect(() => {
     setIsLinkActive(1);
-    async function getProfessors() {
+    async function getserviceArea() {
       try {
         await api
-          .get('/supervisor')
-          .then((response) => setProfessors(response.data));
+          .get('/service-area')
+          .then((response) => setServiceArea(response.data));
       } catch (error) {
         console.log(error);
       }
     }
-    getProfessors();
+    getserviceArea();
   }, [setIsLinkActive]);
-  const { token } = localStorage;
-  const [professors, setProfessors] = useState([]);
+  const [serviceArea, setServiceArea] = useState([]);
 
   const columns = [
     { title: '#', field: 'id' },
     { title: 'Nome', field: 'name' },
-    { title: 'Sobrenome', field: 'surname' },
-    { title: 'RA', field: 'registration' },
-    { title: 'Curso', field: 'class' },
+    { title: 'Curso', field: 'class_name' },
+    { title: 'Descrição', field: 'description' },
   ];
+
   async function handleDelete(option, id) {
     if (option) {
       try {
-        await api
-          .put(
-            'professor/delete',
-            { id },
-            {
-              headers: {
-                Authorization: token,
-              },
-            }
-          )
-          .then(() =>
-            store.addNotification({
-              title: 'Sucesso',
-              message: `O professor foi desativado do sistema com sucesso.`,
-              type: 'success',
-              insert: 'top',
-              container: 'top-right',
-              animationIn: ['animated', 'fadeIn'],
-              animationOut: ['animated', 'fadeOut'],
-              dismiss: {
-                duration: 5000,
-                onScreen: true,
-              },
-            })
-          );
+        await api.delete(`service-area/${id}`).then(() =>
+          store.addNotification({
+            title: 'Sucesso',
+            message: `A area de atendimento foi desativada do sistema com sucesso.`,
+            type: 'success',
+            insert: 'top',
+            container: 'top-right',
+            animationIn: ['animated', 'fadeIn'],
+            animationOut: ['animated', 'fadeOut'],
+            dismiss: {
+              duration: 5000,
+              onScreen: true,
+            },
+          })
+        );
       } catch (error) {
         console.log(error.response.status);
 
         store.addNotification({
           title: 'Erro',
-          message: `Não foi possível desativar o professor do sistema.`,
+          message: `Não foi possível desativar a area de atendimento do sistema.`,
           type: 'danger',
           insert: 'top',
           container: 'top-right',
@@ -81,11 +70,11 @@ function List({ setIsLinkActive }) {
     <>
       <div className={Container}>
         <SearchTable
-          title={'Professores'}
+          title={'Areas de atendimento'}
           columnsName={columns}
-          rows={professors}
+          rows={serviceArea}
           deleteBtn={handleDelete}
-          professor={true}
+          serviceArea={true}
         />
       </div>
     </>

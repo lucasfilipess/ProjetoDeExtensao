@@ -96,7 +96,8 @@ module.exports = {
           'person.neighborhood',
           'person.street',
           'person.number',
-          'person.complement'
+          'person.complement',
+          'patient_has_accompanying.id as id_accompanying'
         );
 
       return response.status(200).json(rows);
@@ -127,9 +128,13 @@ module.exports = {
         type: type,
       });
 
-      return response
-        .status(201)
-        .json({ status: 'success', message: 'user created', token: token });
+      return response.status(201).json({
+        status: 'success',
+        message: 'user created',
+        token: token,
+        name: name,
+        type: type,
+      });
     } catch (error) {
       return response
         .status(500)
@@ -316,6 +321,9 @@ module.exports = {
     try {
       const id_accompanying = request.id;
       const id = request.params.id;
+
+      console.log('id_accompanying', id_accompanying);
+      console.log('id', id);
 
       await connection('patient_has_accompanying')
         .where('patient_has_accompanying.id', id)

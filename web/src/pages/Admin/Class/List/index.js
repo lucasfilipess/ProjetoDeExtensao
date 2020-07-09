@@ -8,55 +8,41 @@ import { Route, Switch } from 'react-router-dom';
 function List({ setIsLinkActive }) {
   useEffect(() => {
     setIsLinkActive(1);
-    async function getProfessors() {
+    async function getclassData() {
       try {
-        await api
-          .get('/supervisor')
-          .then((response) => setProfessors(response.data));
+        await api.get('/class').then((response) => setClass(response.data));
       } catch (error) {
         console.log(error);
       }
     }
-    getProfessors();
+    getclassData();
   }, [setIsLinkActive]);
-  const { token } = localStorage;
-  const [professors, setProfessors] = useState([]);
+  const [classData, setClass] = useState([]);
 
   const columns = [
     { title: '#', field: 'id' },
     { title: 'Nome', field: 'name' },
-    { title: 'Sobrenome', field: 'surname' },
-    { title: 'RA', field: 'registration' },
-    { title: 'Curso', field: 'class' },
+    { title: 'Duração', field: 'duration' },
+    { title: 'Campus', field: 'campus' },
   ];
   async function handleDelete(option, id) {
     if (option) {
       try {
-        await api
-          .put(
-            'professor/delete',
-            { id },
-            {
-              headers: {
-                Authorization: token,
-              },
-            }
-          )
-          .then(() =>
-            store.addNotification({
-              title: 'Sucesso',
-              message: `O professor foi desativado do sistema com sucesso.`,
-              type: 'success',
-              insert: 'top',
-              container: 'top-right',
-              animationIn: ['animated', 'fadeIn'],
-              animationOut: ['animated', 'fadeOut'],
-              dismiss: {
-                duration: 5000,
-                onScreen: true,
-              },
-            })
-          );
+        await api.delete(`class/${id}`).then(() =>
+          store.addNotification({
+            title: 'Sucesso',
+            message: `O curso foi desativado do sistema com sucesso.`,
+            type: 'success',
+            insert: 'top',
+            container: 'top-right',
+            animationIn: ['animated', 'fadeIn'],
+            animationOut: ['animated', 'fadeOut'],
+            dismiss: {
+              duration: 5000,
+              onScreen: true,
+            },
+          })
+        );
       } catch (error) {
         console.log(error.response.status);
 
@@ -81,11 +67,11 @@ function List({ setIsLinkActive }) {
     <>
       <div className={Container}>
         <SearchTable
-          title={'Professores'}
+          title={'Cursos'}
           columnsName={columns}
-          rows={professors}
+          rows={classData}
           deleteBtn={handleDelete}
-          professor={true}
+          classData={true}
         />
       </div>
     </>

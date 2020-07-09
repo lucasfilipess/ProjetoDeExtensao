@@ -19,6 +19,9 @@ const session = require('./controllers/SessionController');
 const patient = require('./controllers/PatientController');
 const supervisor = require('./controllers/SupervisorController');
 const admin = require('./controllers/AdminController');
+const classCtrl = require('./controllers/ClassController');
+const advice = require('./controllers/AdviceController');
+const serviceArea = require('./controllers/ServiceAreaController');
 
 routes.post(
   '/login',
@@ -140,5 +143,17 @@ routes.put(
 );
 
 routes.delete('admin/student', isAdmin, admin.deleteStudent);
+
+// //////////////////////////////////////////////////////////////////////
+
+routes.get('/advice', advice.index);
+routes.get('/class', classCtrl.index);
+routes.get('/service-area', serviceArea.index);
+routes.post('/class', classCtrl.create);
+routes.post('/service-area', serviceArea.create);
+routes.put('/service-area/:id', serviceArea.update);
+routes.put('/class/:id', classCtrl.update);
+routes.delete('/class/:id', classCtrl.delete);
+routes.delete('/service-area/:id', serviceArea.delete);
 
 module.exports = routes;
