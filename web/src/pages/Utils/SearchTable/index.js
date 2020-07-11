@@ -18,7 +18,7 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import Update from '../../Admin/Professor/Update';
+import UpdateSupervisor from '../../Admin/Supervisor/Update';
 import UpdateAccompanied from '../../Patient/Accompanied/Update';
 import UpdateClass from '../../Admin/Class/Update';
 import UpdateServiceArea from '../../Admin/ServiceArea/Update';
@@ -99,7 +99,7 @@ export default function MaterialTableDemo({
             render: (rows) => {
               return (
                 <>
-                  {supervisor && <Update data={rows} />}
+                  {supervisor && <UpdateSupervisor data={rows} />}
                   {patient && <UpdateAccompanied data={rows} />}
                   {classData && <UpdateClass data={rows} />}
                   {serviceArea && <UpdateServiceArea data={rows} />}

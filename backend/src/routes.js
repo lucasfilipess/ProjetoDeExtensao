@@ -101,7 +101,7 @@ routes.put(
 routes.get('/admin', admin.index);
 
 routes.post(
-  'admin/supervisor',
+  '/admin/supervisor',
   isAdmin,
   authEmail,
   celebrate({
@@ -111,19 +111,19 @@ routes.post(
 );
 
 routes.put(
-  'admin/supervisor',
+  '/admin/supervisor/:id',
   isAdmin,
-  authEmail,
+  authEmailUpdate,
   celebrate({
     body: supervisor_schema,
   }),
   admin.updateSupervisor
 );
 
-routes.delete('admin/supervisor', isAdmin, admin.deleteSupervisor);
+routes.delete('/admin/supervisor/:id', isAdmin, admin.deleteSupervisor);
 
 routes.post(
-  'admin/student',
+  '/admin/student',
   isAdmin,
   authEmail,
   celebrate({
@@ -133,7 +133,7 @@ routes.post(
 );
 
 routes.put(
-  'admin/student',
+  '/admin/student',
   isAdmin,
   authEmail,
   celebrate({
@@ -142,7 +142,7 @@ routes.put(
   admin.updateStudent
 );
 
-routes.delete('admin/student', isAdmin, admin.deleteStudent);
+routes.delete('/admin/student', isAdmin, admin.deleteStudent);
 
 // //////////////////////////////////////////////////////////////////////
 

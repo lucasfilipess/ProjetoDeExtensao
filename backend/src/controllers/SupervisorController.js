@@ -7,8 +7,11 @@ module.exports = {
         .join('supervisor', 'supervisor.id_person', '=', 'person.id')
         .join('advice', 'advice.id', '=', 'supervisor.id_advice')
         .join('class', 'class.id', '=', 'supervisor.id_class')
+        .where('supervisor.delete', false)
         .select(
           'supervisor.id',
+          'supervisor.id_class',
+          'supervisor.id_advice',
           'person.type',
           'person.name',
           'person.surname',
@@ -25,6 +28,7 @@ module.exports = {
           'person.street',
           'person.number',
           'person.complement',
+          'person.password',
           'supervisor.registration',
           'advice.name as advice',
           'advice.uf as advice_uf',
