@@ -96,7 +96,7 @@ module.exports = {
 
   async updateSupervisor(request, response) {
     try {
-      const { id } = request.body;
+      const id = request.params.id;
       const {
         id_advice,
         id_class,
@@ -164,7 +164,7 @@ module.exports = {
   },
   async deleteSupervisor(request, response) {
     try {
-      const { id } = request.body;
+      const id = request.params.id;
 
       await connection('supervisor').where('supervisor.id', id).update({
         delete: true,
