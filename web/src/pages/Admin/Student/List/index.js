@@ -8,32 +8,33 @@ import { Route, Switch } from 'react-router-dom';
 function List({ setIsLinkActive }) {
   useEffect(() => {
     setIsLinkActive(1);
-    async function getSupervisores() {
+    async function getStudents() {
       try {
         await api
-          .get('/supervisor')
-          .then((response) => setSupervisores(response.data));
+          .get('/admin/student')
+          .then((response) => setStudents(response.data));
       } catch (error) {
         console.log(error);
       }
     }
-    getSupervisores();
+    getStudents();
   }, [setIsLinkActive]);
-  const [supervisores, setSupervisores] = useState([]);
+  const [students, setStudents] = useState([]);
 
   const columns = [
     { title: '#', field: 'id' },
     { title: 'Nome', field: 'name' },
     { title: 'Sobrenome', field: 'surname' },
-    { title: 'RA', field: 'registration' },
+    { title: 'RA', field: 'ra' },
     { title: 'Curso', field: 'class' },
-    { title: 'Tipo', field: 'type' },
+    { title: 'Campus', field: 'campus' },
+    { title: 'Período', field: 'period' },
   ];
   async function handleDelete(option, id) {
     if (option) {
       try {
         await api
-          .delete(`admin/supervisor/${id}`, {
+          .delete(`admin/student/${id}`, {
             headers: {
               Authorization: localStorage.getItem('token'),
             },
@@ -41,7 +42,7 @@ function List({ setIsLinkActive }) {
           .then(() =>
             store.addNotification({
               title: 'Sucesso',
-              message: `O supervisor foi desativado do sistema com sucesso.`,
+              message: `O aluno foi desativado do sistema com sucesso.`,
               type: 'success',
               insert: 'top',
               container: 'top-right',
@@ -58,7 +59,7 @@ function List({ setIsLinkActive }) {
 
         store.addNotification({
           title: 'Erro',
-          message: `Não foi possível desativar o supervisor do sistema.`,
+          message: `Não foi possível desativar o student do sistema.`,
           type: 'danger',
           insert: 'top',
           container: 'top-right',
@@ -77,11 +78,11 @@ function List({ setIsLinkActive }) {
     <>
       <div className={Container}>
         <SearchTable
-          title={'Supervisores'}
+          title={'studentes'}
           columnsName={columns}
-          rows={supervisores}
+          rows={students}
           deleteBtn={handleDelete}
-          supervisor={true}
+          student={true}
         />
       </div>
     </>

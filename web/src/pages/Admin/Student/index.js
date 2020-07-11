@@ -16,7 +16,7 @@ const LoadableList = Loadable({
 
 function Student({ setIsActive }) {
   useEffect(() => {
-    setIsActive(1);
+    setIsActive(2);
   }, [setIsActive]);
 
   const [isLinkActive, setIsLinkActive] = useState(null);
