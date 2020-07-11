@@ -5,14 +5,14 @@ import {
   FormNav,
   StyledInput,
   StyledFocus,
+  Password,
 } from './styles.module.scss';
-// import user from '../../../Assets/images/user.svg';
 import api from '../../../../Services/api';
 import { store } from 'react-notifications-component';
+import { FiEye } from 'react-icons/fi';
 
-function Add({ setIsLinkActive }) {
+function UpdateSupervisor({ data }) {
   useEffect(() => {
-    setIsLinkActive(2);
     async function getClass() {
       await api.get('/class').then((response) => setClassData(response.data));
     }
@@ -21,10 +21,11 @@ function Add({ setIsLinkActive }) {
     }
     getClass();
     getAdvice();
-  }, [setIsLinkActive]);
+  }, []);
 
   const [classData, setClassData] = useState([]);
   const [advice, setAdvice] = useState([]);
+  const [eye, setEye] = useState(false);
 
   const [values, setValues] = useState({
     id_advice: '',
@@ -48,7 +49,9 @@ function Add({ setIsLinkActive }) {
     password: '',
     confirmPassword: '',
   });
-
+  useState(() => {
+    setValues(data);
+  }, []);
   function handleChange(e) {
     setValues({
       ...values,
@@ -62,8 +65,8 @@ function Add({ setIsLinkActive }) {
     const data = {
       id_advice: values.id_advice,
       id_class: values.id_class,
-      registration: values.registration,
       type: values.type,
+      registration: values.registration,
       name: values.name,
       surname: values.surname,
       birth_date: values.birth_date,
@@ -85,7 +88,7 @@ function Add({ setIsLinkActive }) {
 
     try {
       await api
-        .post('admin/supervisor', data, {
+        .put(`admin/supervisor/${values.id}`, data, {
           headers: {
             authorization: localStorage.getItem('token'),
           },
@@ -106,11 +109,9 @@ function Add({ setIsLinkActive }) {
           })
         );
     } catch (error) {
-      console.log(error);
-
       store.addNotification({
         title: 'Ooops',
-        message: 'Houve um erro ao processar a sua requisição.',
+        message: `Houve um erro ao processar a sua requisição. (${error.response.data.message})`,
         type: 'danger',
         insert: 'top',
         container: 'top-right',
@@ -129,7 +130,7 @@ function Add({ setIsLinkActive }) {
         <div className={FormContainer}>
           <div className={FormNav}>
             <div>
-              <p>Dados do professor</p>
+              <p>Dados do supervisor</p>
             </div>
           </div>
           <form onSubmit={handleUpdate}>
@@ -156,6 +157,7 @@ function Add({ setIsLinkActive }) {
                   className={isFocus === 2 ? StyledFocus : StyledInput}
                   type="text"
                   maxLength={11}
+                  minLength={11}
                 />
                 <input
                   placeholder="Email"
@@ -328,7 +330,7 @@ function Add({ setIsLinkActive }) {
                   onFocus={() => setIsFocus(17)}
                   className={isFocus === 17 ? StyledFocus : StyledInput}
                   type="number"
-                  max={20}
+                  max={99999}
                 />
 
                 <select
@@ -339,7 +341,11 @@ function Add({ setIsLinkActive }) {
                   onFocus={() => setIsFocus(18)}
                   className={isFocus === 18 ? StyledFocus : StyledInput}
                 >
-                  <option value={'supervisor'}>Supervisor</option>
+                  <option value={''} disabled selected>
+                    Selecione o acesso
+                  </option>
+                  <option value={'professor'}>Professor</option>
+                  <option value={'preceptor'}>Preceptor</option>
                   <option value={'admin'}>Administrador</option>
                 </select>
 
@@ -361,28 +367,24 @@ function Add({ setIsLinkActive }) {
                   ))}
                 </select>
 
-                <input
-                  placeholder="Senha"
-                  name="password"
-                  required
-                  onChange={(e) => handleChange(e)}
-                  value={values.password}
-                  onFocus={() => setIsFocus(20)}
-                  className={isFocus === 20 ? StyledFocus : StyledInput}
-                  type="password"
-                  minLength={8}
-                />
-
-                <input
-                  placeholder="Confirmar Senha"
-                  name="confirmPassword"
-                  onChange={(e) => handleChange(e)}
-                  value={values.confirmPassword}
-                  onFocus={() => setIsFocus(21)}
-                  className={isFocus === 21 ? StyledFocus : StyledInput}
-                  type="password"
-                  minLength={8}
-                />
+                <div className={Password}>
+                  <input
+                    placeholder="Senha"
+                    name="password"
+                    required
+                    onChange={(e) => handleChange(e)}
+                    value={values.password}
+                    onFocus={() => setIsFocus(20)}
+                    className={isFocus === 20 ? StyledFocus : StyledInput}
+                    type={eye ? 'text' : 'password'}
+                    minLength={8}
+                  />
+                  <FiEye
+                    onMouseDown={() => setEye(true)}
+                    onMouseUp={() => setEye(false)}
+                    size={24}
+                  />
+                </div>
               </div>
             </div>
             <div>
@@ -395,4 +397,4 @@ function Add({ setIsLinkActive }) {
   );
 }
 
-export default Add;
+export default UpdateSupervisor;

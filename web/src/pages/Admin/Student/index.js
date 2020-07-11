@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Nav, Content, ActiveLink, StyledLink } from './styles.module.scss';
 import { Link, Switch, Route } from 'react-router-dom';
-// import Loadable from 'react-loadable';
-// import { Loader } from '../../App';
-//
-// const LoadableSettingsProfile = Loadable({
-//   loader: () => import('./SettingsProfile'),
-//   loading: Loader,
-// });
+import Loadable from 'react-loadable';
+import Loader from '../../Loader';
 
-function Settings({ setIsActive }) {
+const LoadableAdd = Loadable({
+  loader: () => import('./Add'),
+  loading: Loader,
+});
+
+const LoadableList = Loadable({
+  loader: () => import('./List'),
+  loading: Loader,
+});
+
+function Student({ setIsActive }) {
   useEffect(() => {
-    setIsActive(2);
+    setIsActive(1);
   }, [setIsActive]);
 
   const [isLinkActive, setIsLinkActive] = useState(null);
@@ -20,60 +25,40 @@ function Settings({ setIsActive }) {
     <>
       <div className={Nav}>
         <div>
-          {/* <Link
-            to="/home/settings"
+          <Link
+            to="/admin/student"
             className={isLinkActive === 1 ? ActiveLink : StyledLink}
           >
-            Perfil
+            Alunos
           </Link>
           <Link
-            to="/home/settings/consultations"
+            to="/admin/student/add"
             className={isLinkActive === 2 ? ActiveLink : StyledLink}
           >
-            Consultas
+            Cadastrar
           </Link>
-          <Link
-            to="/home/settings/notifications"
-            className={isLinkActive === 3 ? ActiveLink : StyledLink}
-          >
-            Notificações
-          </Link> */}
         </div>
       </div>
       <div className={Content}>
         <Switch>
-          {/* <Route
+          <Route
             exact
-            path="/home/settings"
+            path="/admin/student"
             render={(props) => (
-              <LoadableSettingsProfile
-                {...props}
-                setIsLinkActive={setIsLinkActive}
-              />
+              <LoadableList {...props} setIsLinkActive={setIsLinkActive} />
             )}
           />
           <Route
-            path="/home/settings/consultations"
+            exact
+            path="/admin/student/add"
             render={(props) => (
-              <LoadableSettingsConsultations
-                {...props}
-                setIsLinkActive={setIsLinkActive}
-              />
+              <LoadableAdd {...props} setIsLinkActive={setIsLinkActive} />
             )}
           />
-          <Route
-            path="/home/settings/notifications"
-            render={(props) => (
-              <LoadableSettingsNotifications
-                {...props}
-                setIsLinkActive={setIsLinkActive}
-              />
-            )}
-          /> */}
         </Switch>
       </div>
     </>
   );
 }
 
-export default Settings;
+export default Student;

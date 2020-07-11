@@ -7,8 +7,8 @@ import Error from './Pages/Error';
 import { FaUserGraduate, FaUserMd, FaUniversity } from 'react-icons/fa';
 import { RiHandHeartLine } from 'react-icons/ri';
 
-const LoadableProfessor = Loadable({
-  loader: () => import('./Pages/Admin/Professor'),
+const LoadableSupervisor = Loadable({
+  loader: () => import('./Pages/Admin/Supervisor'),
   loading: Loader,
 });
 const LoadableStudent = Loadable({
@@ -37,11 +37,11 @@ function Admin() {
   return (
     <>
       <Layout
-        link1={'/admin/professor'}
+        link1={'/admin/supervisor'}
         link2={'/admin/student'}
         link3={'/admin/class'}
         link4={'/admin/service-area'}
-        name1={'Professor'}
+        name1={'Supervisor'}
         name2={'Aluno'}
         name3={'Curso'}
         name4={'Atendimento'}
@@ -53,9 +53,9 @@ function Admin() {
       >
         <Switch>
           <Route
-            path="/admin/professor"
+            path="/admin/supervisor"
             render={(props) => (
-              <LoadableProfessor {...props} setIsActive={setIsActive} />
+              <LoadableSupervisor {...props} setIsActive={setIsActive} />
             )}
           />
           <Route

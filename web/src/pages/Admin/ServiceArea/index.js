@@ -13,7 +13,7 @@ const LoadableList = Loadable({
   loader: () => import('./List'),
   loading: Loader,
 });
-function Settings({ setIsActive }) {
+function ServiceArea({ setIsActive }) {
   useEffect(() => {
     setIsActive(4);
   }, [setIsActive]);
@@ -60,4 +60,4 @@ function Settings({ setIsActive }) {
   );
 }
 
-export default Settings;
+export default ServiceArea;

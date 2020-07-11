@@ -13,7 +13,7 @@ const LoadableList = Loadable({
   loader: () => import('./List'),
   loading: Loader,
 });
-function Settings({ setIsActive }) {
+function Supervisor({ setIsActive }) {
   useEffect(() => {
     setIsActive(1);
   }, [setIsActive]);
@@ -25,13 +25,13 @@ function Settings({ setIsActive }) {
       <div className={Nav}>
         <div>
           <Link
-            to="/admin/professor"
+            to="/admin/supervisor"
             className={isLinkActive === 1 ? ActiveLink : StyledLink}
           >
-            Professores
+            Supervisores
           </Link>
           <Link
-            to="/admin/professor/add"
+            to="/admin/supervisor/add"
             className={isLinkActive === 2 ? ActiveLink : StyledLink}
           >
             Cadastrar
@@ -42,14 +42,14 @@ function Settings({ setIsActive }) {
         <Switch>
           <Route
             exact
-            path="/admin/professor"
+            path="/admin/supervisor"
             render={(props) => (
               <LoadableList {...props} setIsLinkActive={setIsLinkActive} />
             )}
           />
           <Route
             exact
-            path="/admin/professor/add"
+            path="/admin/supervisor/add"
             render={(props) => (
               <LoadableAdd {...props} setIsLinkActive={setIsLinkActive} />
             )}
@@ -60,4 +60,4 @@ function Settings({ setIsActive }) {
   );
 }
 
-export default Settings;
+export default Supervisor;
