@@ -1,15 +1,11 @@
 const connection = require('../database/connection');
-// const GenerateToken = require('../utils/GenerateToken');
 
 module.exports = {
   async index(request, response) {
     try {
-      const rows = await connection('service_area')
-        .join('class', 'class.id', '=', 'service_area.id_class')
-        .where('service_area.delete', false)
-        .andWhere('class.delete', false)
-        // .select('*');
-        .select('service_area.*', 'class.name as class_name');
+      const rows = await connection('class')
+        .where('class.delete', false)
+        .select('*');
 
       return response.status(200).json(rows);
     } catch (error) {
@@ -21,17 +17,17 @@ module.exports = {
 
   async create(request, response) {
     try {
-      const { id_class, name, description } = request.body;
+      const { campus, name, duration } = request.body;
 
-      await connection('service_area').insert({
-        id_class,
+      await connection('class').insert({
+        campus,
         name,
-        description,
+        duration,
       });
 
       return response.status(201).json({
         status: 'success',
-        message: 'service area created',
+        message: 'class created',
       });
     } catch (error) {
       return response
@@ -42,17 +38,17 @@ module.exports = {
   async update(request, response) {
     try {
       const id = request.params.id;
-      const { id_class, name, description } = request.body;
+      const { campus, name, duration } = request.body;
 
-      await connection('service_area').where('service_area.id', id).update({
-        id_class,
+      await connection('class').where('class.id', id).update({
+        campus,
         name,
-        description,
+        duration,
       });
 
       return response.status(201).json({
         status: 'success',
-        message: 'service area updated',
+        message: 'class updated',
       });
     } catch (error) {
       return response
@@ -64,13 +60,13 @@ module.exports = {
     try {
       const id = request.params.id;
 
-      await connection('service_area').where('service_area.id', id).update({
+      await connection('class').where('class.id', id).update({
         delete: true,
       });
 
       return response.status(201).json({
         status: 'success',
-        message: 'service area deleted',
+        message: 'class deleted',
       });
     } catch (error) {
       return response

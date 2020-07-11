@@ -8,32 +8,47 @@ import {
 } from './styles.module.scss';
 // import user from '../../../Assets/images/user.svg';
 import api from '../../../../Services/api';
+import { store } from 'react-notifications-component';
 
 function Add({ setIsLinkActive }) {
   useEffect(() => {
     setIsLinkActive(2);
+    async function getClass() {
+      await api.get('/class').then((response) => setClassData(response.data));
+    }
+    async function getAdvice() {
+      await api.get('/advice').then((response) => setAdvice(response.data));
+    }
+    getClass();
+    getAdvice();
   }, [setIsLinkActive]);
 
+  const [classData, setClassData] = useState([]);
+  const [advice, setAdvice] = useState([]);
+
   const [values, setValues] = useState({
-    type: '',
+    id_advice: '',
+    id_class: '',
+    registration: '',
     name: '',
     surname: '',
+    birth_date: '',
     cpf: '',
     rg: '',
     telephone: '',
     cellPhone: '',
     email: '',
     cep: '',
-    registration: '',
     uf: '',
     city: '',
     neighborhood: '',
     street: '',
-    number: 0,
+    number: '',
     complement: '',
     password: '',
     confirmPassword: '',
   });
+
   function handleChange(e) {
     setValues({
       ...values,
@@ -45,16 +60,19 @@ function Add({ setIsLinkActive }) {
   async function handleUpdate(e) {
     e.preventDefault();
     const data = {
+      id_advice: values.id_advice,
+      id_class: values.id_class,
+      registration: values.registration,
       type: values.type,
       name: values.name,
       surname: values.surname,
+      birth_date: values.birth_date,
       cpf: values.cpf,
       rg: values.rg,
       telephone: values.telephone,
       cellPhone: values.cellPhone,
       email: values.email,
       cep: values.cep,
-      registration: values.registration,
       uf: values.uf,
       city: values.city,
       neighborhood: values.neighborhood,
@@ -62,21 +80,48 @@ function Add({ setIsLinkActive }) {
       number: values.number,
       complement: values.complement,
       password: values.password,
-      confirmPassword: values.confirmPassword,
     };
     console.log(data);
 
-    // try {
-    //   await api
-    //     .put('patient', data, {
-    //       headers: {
-    //         authorization: localStorage.getItem('token'),
-    //       },
-    //     })
-    //     .then((response) => console.log(response));
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      await api
+        .post('admin/supervisor', data, {
+          headers: {
+            authorization: localStorage.getItem('token'),
+          },
+        })
+        .then(() =>
+          store.addNotification({
+            title: 'Sucesso',
+            message: `O supervisor ${data.name}, foi cadastrado com sucesso`,
+            type: 'success',
+            insert: 'top',
+            container: 'top-right',
+            animationIn: ['animated', 'fadeIn'],
+            animationOut: ['animated', 'fadeOut'],
+            dismiss: {
+              duration: 5000,
+              onScreen: true,
+            },
+          })
+        );
+    } catch (error) {
+      console.log(error);
+
+      store.addNotification({
+        title: 'Ooops',
+        message: 'Houve um erro ao processar a sua requisição.',
+        type: 'danger',
+        insert: 'top',
+        container: 'top-right',
+        animationIn: ['animated', 'fadeIn'],
+        animationOut: ['animated', 'fadeOut'],
+        dismiss: {
+          duration: 8000,
+          onScreen: true,
+        },
+      });
+    }
   }
   return (
     <>
@@ -110,7 +155,7 @@ function Add({ setIsLinkActive }) {
                   onFocus={() => setIsFocus(2)}
                   className={isFocus === 2 ? StyledFocus : StyledInput}
                   type="text"
-                  maxLength={14}
+                  maxLength={11}
                 />
                 <input
                   placeholder="Email"
@@ -145,7 +190,7 @@ function Add({ setIsLinkActive }) {
                   maxLength={9}
                 />
                 <input
-                  placeholder="CEP"
+                  placeholder="Cidade"
                   required
                   name="city"
                   onChange={(e) => handleChange(e)}
@@ -175,16 +220,34 @@ function Add({ setIsLinkActive }) {
                   className={isFocus === 8 ? StyledFocus : StyledInput}
                   type="text"
                 />
-                <input
-                  placeholder="Senha"
-                  name="password"
+
+                <select
                   required
+                  value={values.id_class}
+                  name="id_class"
                   onChange={(e) => handleChange(e)}
-                  value={values.password}
                   onFocus={() => setIsFocus(9)}
                   className={isFocus === 9 ? StyledFocus : StyledInput}
-                  type="password"
-                  minLength={8}
+                >
+                  <option value={''} disabled selected>
+                    Curso
+                  </option>
+                  {classData.map((item, index) => (
+                    <option key={index} value={item.id}>
+                      {item.name}
+                    </option>
+                  ))}
+                </select>
+
+                <input
+                  placeholder="Data de nascimento"
+                  name="birth_date"
+                  required
+                  onChange={(e) => handleChange(e)}
+                  value={values.birth_date}
+                  onFocus={() => setIsFocus(10)}
+                  className={isFocus === 10 ? StyledFocus : StyledInput}
+                  type="date"
                 />
               </div>
 
@@ -195,8 +258,8 @@ function Add({ setIsLinkActive }) {
                   name="surname"
                   onChange={(e) => handleChange(e)}
                   value={values.surname}
-                  onFocus={() => setIsFocus(10)}
-                  className={isFocus === 10 ? StyledFocus : StyledInput}
+                  onFocus={() => setIsFocus(11)}
+                  className={isFocus === 11 ? StyledFocus : StyledInput}
                   type="text"
                   maxLength={30}
                 />
@@ -206,8 +269,8 @@ function Add({ setIsLinkActive }) {
                   name="rg"
                   onChange={(e) => handleChange(e)}
                   value={values.rg}
-                  onFocus={() => setIsFocus(11)}
-                  className={isFocus === 11 ? StyledFocus : StyledInput}
+                  onFocus={() => setIsFocus(12)}
+                  className={isFocus === 12 ? StyledFocus : StyledInput}
                   type="text"
                   maxLength={13}
                 />
@@ -216,8 +279,8 @@ function Add({ setIsLinkActive }) {
                   name="telephone"
                   onChange={(e) => handleChange(e)}
                   value={values.telephone}
-                  onFocus={() => setIsFocus(12)}
-                  className={isFocus === 12 ? StyledFocus : StyledInput}
+                  onFocus={() => setIsFocus(13)}
+                  className={isFocus === 13 ? StyledFocus : StyledInput}
                   type="text"
                   maxLength={14}
                 />
@@ -227,8 +290,8 @@ function Add({ setIsLinkActive }) {
                   name="registration"
                   onChange={(e) => handleChange(e)}
                   value={values.registration}
-                  onFocus={() => setIsFocus(13)}
-                  className={isFocus === 13 ? StyledFocus : StyledInput}
+                  onFocus={() => setIsFocus(14)}
+                  className={isFocus === 14 ? StyledFocus : StyledInput}
                   type="text"
                   maxLength={9}
                 />
@@ -239,8 +302,8 @@ function Add({ setIsLinkActive }) {
                   name="uf"
                   onChange={(e) => handleChange(e)}
                   value={values.uf}
-                  onFocus={() => setIsFocus(14)}
-                  className={isFocus === 14 ? StyledFocus : StyledInput}
+                  onFocus={() => setIsFocus(15)}
+                  className={isFocus === 15 ? StyledFocus : StyledInput}
                   type="text"
                   maxLength={2}
                 />
@@ -250,8 +313,8 @@ function Add({ setIsLinkActive }) {
                   name="neighborhood"
                   onChange={(e) => handleChange(e)}
                   value={values.neighborhood}
-                  onFocus={() => setIsFocus(15)}
-                  className={isFocus === 15 ? StyledFocus : StyledInput}
+                  onFocus={() => setIsFocus(16)}
+                  className={isFocus === 16 ? StyledFocus : StyledInput}
                   type="text"
                   maxLength={100}
                 />
@@ -262,9 +325,10 @@ function Add({ setIsLinkActive }) {
                   name="number"
                   onChange={(e) => handleChange(e)}
                   value={values.number}
-                  onFocus={() => setIsFocus(16)}
-                  className={isFocus === 16 ? StyledFocus : StyledInput}
+                  onFocus={() => setIsFocus(17)}
+                  className={isFocus === 17 ? StyledFocus : StyledInput}
                   type="number"
+                  max={20}
                 />
 
                 <select
@@ -272,23 +336,50 @@ function Add({ setIsLinkActive }) {
                   value={values.type}
                   name="type"
                   onChange={(e) => handleChange(e)}
-                  onFocus={() => setIsFocus(17)}
-                  className={isFocus === 17 ? StyledFocus : StyledInput}
+                  onFocus={() => setIsFocus(18)}
+                  className={isFocus === 18 ? StyledFocus : StyledInput}
                 >
-                  <option value={'professor'} disabled selected>
-                    Nível de Acesso
-                  </option>
-                  <option value={'professor'}>Professor</option>
+                  <option value={'supervisor'}>Supervisor</option>
                   <option value={'admin'}>Administrador</option>
                 </select>
+
+                <select
+                  required
+                  value={values.id_advice}
+                  name="id_advice"
+                  onChange={(e) => handleChange(e)}
+                  onFocus={() => setIsFocus(19)}
+                  className={isFocus === 19 ? StyledFocus : StyledInput}
+                >
+                  <option value={''} disabled selected>
+                    Conselho
+                  </option>
+                  {advice.map((item, index) => (
+                    <option key={index} value={item.id}>
+                      {item.name} ({item.uf})
+                    </option>
+                  ))}
+                </select>
+
+                <input
+                  placeholder="Senha"
+                  name="password"
+                  required
+                  onChange={(e) => handleChange(e)}
+                  value={values.password}
+                  onFocus={() => setIsFocus(20)}
+                  className={isFocus === 20 ? StyledFocus : StyledInput}
+                  type="password"
+                  minLength={8}
+                />
 
                 <input
                   placeholder="Confirmar Senha"
                   name="confirmPassword"
                   onChange={(e) => handleChange(e)}
                   value={values.confirmPassword}
-                  onFocus={() => setIsFocus(18)}
-                  className={isFocus === 18 ? StyledFocus : StyledInput}
+                  onFocus={() => setIsFocus(21)}
+                  className={isFocus === 21 ? StyledFocus : StyledInput}
                   type="password"
                   minLength={8}
                 />

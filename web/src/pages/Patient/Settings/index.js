@@ -20,7 +20,7 @@ const LoadableSettingsConsultations = Loadable({
 
 function Settings({ setIsActive }) {
   useEffect(() => {
-    setIsActive(6);
+    setIsActive(4);
   }, [setIsActive]);
 
   const [isLinkActive, setIsLinkActive] = useState(null);

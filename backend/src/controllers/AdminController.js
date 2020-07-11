@@ -86,6 +86,8 @@ module.exports = {
         .status(201)
         .json({ status: 'success', message: 'user created' });
     } catch (error) {
+      console.log(error);
+
       return response
         .status(500)
         .json({ message: 'internal server error', error: error });

@@ -57,9 +57,9 @@ function Register() {
             },
           });
           localStorage.setItem('token', response.data.token);
+          localStorage.setItem('name', response.data.name);
           localStorage.setItem('type', response.data.type);
-          localStorage.setItem('name', data.nome);
-          history.push(`/${data.type}`);
+          history.push(`/${response.data.type}`);
         });
       } catch (error) {
         store.addNotification({

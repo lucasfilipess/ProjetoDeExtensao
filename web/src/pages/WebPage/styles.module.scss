@@ -1,14 +1,24 @@
 @import '../../Assets/variables.scss';
 
-.Container{
+.Navbar {
+  height: 68px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px;
+  align-items: center;
+  // position: absolute;
+}
+
+.Container {
   .Banner {
     width: 100%;
     height: 100vh;
-    h1{
+    h1 {
       margin-bottom: 2%;
       font-size: 250%;
     }
-    p{
+    p {
       font-size: 130%;
     }
     img {
@@ -16,28 +26,32 @@
       background-position: center;
       background-repeat: no-repeat;
     }
-    .Content{
-      width:500px;
-      height:100px;
-      position:absolute;
-      top:30%;
-      left:10%;
+    .Content {
+      width: 500px;
+      height: 100px;
+      position: absolute;
+      top: 30%;
+      left: 10%;
       display: flex;
       flex-direction: column;
-      button {
-        color: #fff;
-        background: #1665d8;
-        margin-top: 24px;
-        width: 40%;
-        height: 40px;
-        margin:4% 4% 0 0;
-      }
-      .Buttons{
+      .Buttons {
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
+        a {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #fff;
+          background: #1665d8;
+          margin-top: 24px;
+          width: 40%;
+          height: 40px;
+          font-weight: bold;
+          margin: 4% 4% 0 0;
+        }
       }
-    }    
+    }
   }
   .BannerSec {
     width: 100%;
@@ -56,7 +70,7 @@
         height: 170px;
         width: 380px;
         background: #f2f2f2;
-        border: 30% ;
+        border: 30%;
         padding: 20px;
         font-size: 17px;
       }
@@ -67,9 +81,9 @@
   }
 }
 @media only screen and (max-width: $sm) {
-  .Container{
-    .BannerSec{
-      .Boxes {       
+  .Container {
+    .BannerSec {
+      .Boxes {
         div {
           font-size: 15px;
         }
@@ -78,9 +92,9 @@
   }
 }
 @media only screen and (max-width: $md) {
-  .Container{
-    .BannerSec{
-      .Boxes {       
+  .Container {
+    .BannerSec {
+      .Boxes {
         div {
           font-size: 100%;
         }
@@ -89,9 +103,9 @@
   }
 }
 @media only screen and (max-width: $lg) {
-  .Container{
-    .BannerSec{
-      .Boxes {       
+  .Container {
+    .BannerSec {
+      .Boxes {
         div {
           font-size: 100%;
         }

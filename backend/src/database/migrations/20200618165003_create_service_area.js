@@ -3,6 +3,7 @@ exports.up = function (knex) {
     table.increments('id').primary();
     table.integer('id_class').notNullable();
     table.string('name', 100).notNullable();
+    table.boolean('delete').defaultTo(false).notNullable();
     table.string('description').notNullable();
     table.foreign('id_class').references('id').inTable('class');
   });

@@ -8,44 +8,44 @@ import { Route, Switch } from 'react-router-dom';
 function List({ setIsLinkActive }) {
   useEffect(() => {
     setIsLinkActive(1);
-    async function getProfessors() {
+    async function getAccompanied() {
       try {
         await api
-          .get('/supervisor')
-          .then((response) => setProfessors(response.data));
+          .get('patient/my-accompanied', {
+            headers: {
+              Authorization: localStorage.getItem('token'),
+            },
+          })
+          .then((response) => setAccompanied(response.data));
       } catch (error) {
         console.log(error);
       }
     }
-    getProfessors();
+    getAccompanied();
   }, [setIsLinkActive]);
-  const { token } = localStorage;
-  const [professors, setProfessors] = useState([]);
+  const [accompanied, setAccompanied] = useState([]);
 
   const columns = [
     { title: '#', field: 'id' },
     { title: 'Nome', field: 'name' },
     { title: 'Sobrenome', field: 'surname' },
-    { title: 'RA', field: 'registration' },
-    { title: 'Curso', field: 'class' },
+    { title: 'Nascimento', field: 'birth_date' },
+    { title: 'CPF', field: 'cpf' },
+    { title: 'RG', field: 'rg' },
   ];
   async function handleDelete(option, id) {
     if (option) {
       try {
         await api
-          .put(
-            'professor/delete',
-            { id },
-            {
-              headers: {
-                Authorization: token,
-              },
-            }
-          )
+          .delete(`patient/accompanied/${id}`, {
+            headers: {
+              Authorization: localStorage.getItem('token'),
+            },
+          })
           .then(() =>
             store.addNotification({
               title: 'Sucesso',
-              message: `O professor foi desativado do sistema com sucesso.`,
+              message: `O companhado foi desativado do sistema com sucesso.`,
               type: 'success',
               insert: 'top',
               container: 'top-right',
@@ -62,7 +62,7 @@ function List({ setIsLinkActive }) {
 
         store.addNotification({
           title: 'Erro',
-          message: `Não foi possível desativar o professor do sistema.`,
+          message: `Não foi possível desativar o acompanhado do sistema.`,
           type: 'danger',
           insert: 'top',
           container: 'top-right',
@@ -81,11 +81,11 @@ function List({ setIsLinkActive }) {
     <>
       <div className={Container}>
         <SearchTable
-          title={'Professores'}
+          title={'Acompanhados'}
           columnsName={columns}
-          rows={professors}
+          rows={accompanied}
           deleteBtn={handleDelete}
-          professor={true}
+          patient={true}
         />
       </div>
     </>

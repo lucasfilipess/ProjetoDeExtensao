@@ -4,6 +4,7 @@ exports.up = function (knex) {
     table.string('name', 100).notNullable();
     table.integer('duration', 2).notNullable();
     table.integer('campus', 30).notNullable();
+    table.boolean('delete').defaultTo(false).notNullable();
   });
 };
 exports.down = function (knex) {

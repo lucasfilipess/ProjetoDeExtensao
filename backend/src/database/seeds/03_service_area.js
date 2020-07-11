@@ -5,45 +5,73 @@ exports.seed = function (knex) {
       return knex('service_area').insert([
         {
           id: 1,
-          name: 'Pediatria',
+          name: 'Fisioterapia',
           id_class: 1,
           description:
-            'Área da medicina especializada na saúde de crianças e que presta assistência a esse público específico em seus mais diversos aspectos, tanto de modo preventivo quanto curativo.',
+            'Oferece atendimento em Fisioterapia nas áreas de cardiologia, pneumologia e neuropediatria ainda no primeiro semestre deste ano. Para o segundo semestre haverá consultas de ortopedia, gerontologia, saúde da mulher e neurologia adulto.',
         },
         {
           id: 2,
-          name: 'Dermatologia',
-          id_class: 1,
+          name: 'Nutrição',
+          id_class: 2,
           description:
-            'Área da medicina especializada no diagnóstico, tratamento e prevenção de doenças da pele, pelos, mucosas, cabelos e unhas. ',
+            'Atendimento em todas as áreas clínicas da nutrição com diagnóstico e tratamento, entre eles pediatria, obesidade, controle alimentar, gestantes e idosos. É preciso encaminhamento médico, fisioterápico ou do educador físico do SUS',
         },
         {
           id: 3,
-          name: 'Oncologia',
-          id_class: 2,
+          name: 'Psicologia',
+          id_class: 3,
           description:
-            'Área da fisioterapia que tem como objetivo preservar e restaurar a integridade cinético-funcional de órgãos e sistemas.',
+            'Atende com psicoterapia Infantil, adolescente e adulto.',
         },
         {
           id: 4,
-          name: 'Neurofuncional',
-          id_class: 2,
+          name: 'Angiologia',
+          id_class: 4,
           description:
-            'Trata-se de técnicas fisioterapêuticas utilizadas para a recuperação de pacientes afetados por doenças neurológicas originadas no sistema nervoso.',
+            'Angiologia é a utilidade médica que se ocupa do tratamento clínico das doenças que acometem vasos sanguíneos e vasos linfáticos, como varizes, aneurismas e obstruções arteriais.',
         },
         {
           id: 5,
-          name: 'Nutrição clínica',
-          id_class: 3,
+          name: 'Cardiologia',
+          id_class: 4,
           description:
-            'O profissional que atua na nutrição clínica tem por função prestar assistência na dieta dos indivíduos e promover a saúde.',
+            'Cardiologia é a especialidade médica que se ocupa do diagnóstico e tratamento das doenças que acometem o coração bem como os outros componentes do sistema circulatório. ',
         },
         {
           id: 6,
-          name: 'Nutrição esportiva',
-          id_class: 3,
+          name: 'Dermatologia',
+          id_class: 4,
           description:
-            'Tantos os atletas profissionais quanto os amadores são possíveis clientes para os nutricionistas esportivos.Quem procura obter bons resultados na prática de exercícios não pode dispensar o acompanhamento nutricional, que também ajuda na prevenção de lesões e fraturas.',
+            'Dermatologia é a especialidade médica que se ocupa do diagnóstico e tratamento clínico-cirúrgico das enfermidades relacionados à pele e aos anexos cutâneos',
+        },
+        {
+          id: 7,
+          name: 'Endocrinologia',
+          id_class: 4,
+          description:
+            'Endocrinologia é uma especialidade médica que estuda as ordens do sistema endócrino e suas secreções específicas, chamadas de secreções fisiológicas.',
+        },
+        {
+          id: 8,
+          name: 'Gastroenterologia',
+          id_class: 4,
+          description:
+            'A Gastroenterologia ou Gastrenterologia, é a especialidade médica que se ocupa do estudo, diagnóstico e tratamento clínico das doenças do aparelho digestivo.',
+        },
+        {
+          id: 9,
+          name: 'Geriatria',
+          id_class: 4,
+          description:
+            'Medicina geriátrica ou geriatria é o ramo da medicina que foca o estudo, a prevenção e o tratamento de doenças e da incapacidade em idades avançadas.',
+        },
+        {
+          id: 10,
+          name: 'Neurologia',
+          id_class: 4,
+          description:
+            'Neurologia é a especialidade médica que trata dos distúrbios estruturais do sistema nervoso. ',
         },
       ]);
     });

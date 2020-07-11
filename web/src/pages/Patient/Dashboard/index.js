@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-
+import React, { useEffect, useState } from 'react';
 import {
   Container,
   Boxes,
@@ -7,12 +6,13 @@ import {
   Boxes2,
   Warnings,
   Arrow,
-  Calendar,
+  // Calendar,
   Boxes3,
   SocialMedia,
   Graphic,
 } from './styles.module.scss';
-import calendar from '../../../Assets/images/calendar.png';
+// import calendar from '../../../Assets/images/calendar.png';
+import Calendar from 'react-calendar';
 import calendarSvg from '../../../Assets/images/calendar.svg';
 import pills from '../../../Assets/images/kendal-L4iKccAChOc-unsplash.jpg';
 import calendarGoogle from '../../../Assets/images/googleAgenda.webp';
@@ -22,11 +22,25 @@ import whatsappIcon from '../../../Assets/images/whatsapp.svg';
 import youtubeIcon from '../../../Assets/images/youtube.svg';
 import graphic from '../../../Assets/images/grafico.PNG';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
+import 'react-calendar/dist/Calendar.css';
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+import InfiniteCalendar from 'react-infinite-calendar';
+import 'react-infinite-calendar/styles.css';
 
 function Dashboard({ setIsActive }) {
   useEffect(() => {
     setIsActive(1);
   }, [setIsActive]);
+
+  const [value, onChange] = useState(new Date());
+
+  var today = new Date();
+  var lastWeek = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate() - 7
+  );
   return (
     <>
       <div className={Container}>
@@ -57,17 +71,44 @@ function Dashboard({ setIsActive }) {
 
         <div className={Boxes2}>
           <div
-            className={Warnings}
-            style={{ backgroundImage: `url(${pills})` }}
+          // className={Warnings}
+          // style={{ backgroundImage: `url(${pills})` }}
           >
-            <p>Saiba como jogar fora medicamentos vencidos</p>
+            {/* <p>Saiba como jogar fora medicamentos vencidos</p>
             <div className={Arrow}>
               <AiOutlineArrowLeft />
               <AiOutlineArrowRight />
-            </div>
+            </div> */}
+            <Carousel>
+              <div>
+                <img src={pills} />
+                {/* <p className="legend">Legend 1</p> */}
+              </div>
+              <div>
+                <img src={pills} />
+                {/* <p className="legend">Legend 2</p> */}
+              </div>
+              <div>
+                <img src={pills} />
+                {/* <p className="legend">Legend 3</p> */}
+              </div>
+            </Carousel>
           </div>
-          <div className={Calendar}>
-            <img src={calendar} alt="calendar" />
+          <div>
+            {/* <img src={calendar} alt="calendar" /> */}
+            <Calendar
+              onChange={onChange}
+              value={value}
+              showWeekNumbers={true}
+            />
+
+            {/* <InfiniteCalendar
+              width={400}
+              height={600}
+              selected={today}
+              disabledDays={[0, 6]}
+              minDate={lastWeek}
+            /> */}
           </div>
         </div>
 
