@@ -18,6 +18,27 @@ module.exports = {
         .json({ message: 'internal server error', error: error });
     }
   },
+  async myServiceArea(request, response) {
+    try {
+      const id = request.id;
+
+      const rows = await connection('supervisor')
+        .join('class', 'class.id', '=', 'supervisor.id_class')
+        .join('service_area', 'service_area.id_class', '=', 'class.id')
+        .where('service_area.delete', false)
+        .andWhere('supervisor.id', id)
+        .andWhere('class.delete', false)
+        // .select('*');
+        // .select('service_area.*', 'class.name as class_name');
+        .select('*');
+
+      return response.status(200).json(rows);
+    } catch (error) {
+      return response
+        .status(500)
+        .json({ message: 'internal server error', error: error });
+    }
+  },
 
   async create(request, response) {
     try {

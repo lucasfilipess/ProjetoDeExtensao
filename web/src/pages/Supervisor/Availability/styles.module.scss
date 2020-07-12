@@ -1,0 +1,34 @@
+.Nav {
+  display: flex;
+  align-items: flex-end;
+  height: 50px;
+  border-bottom: 1px solid #e4e7eb;
+  width: 100%;
+  padding: 0 20px;
+  div {
+    display: flex;
+    justify-content: space-around;
+    width: 520px;
+    .ActiveLink {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      letter-spacing: -0.05px;
+      color: #3a3b3f;
+      border-bottom: 3px solid #1665d8;
+      padding: 8px 0;
+    }
+    .StyledLink {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      letter-spacing: -0.05px;
+      color: #3a3b3f;
+      padding: 8px 0;
+    }
+  }
+}
+
+.Content {
+  padding: 0 20px;
+}

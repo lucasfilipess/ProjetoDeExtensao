@@ -52,8 +52,10 @@ function Layout({
   let type = '';
   if (localStorage.getItem('type') === 'patient') {
     type = 'Paciente';
-  } else if (localStorage.getItem('type') === 'supervisor') {
-    type = 'Supervisor';
+  } else if (localStorage.getItem('type') === 'professor') {
+    type = 'Professor';
+  } else if (localStorage.getItem('type') === 'preceptor') {
+    type = 'Preceptor';
   } else {
     type = 'Administrador';
   }

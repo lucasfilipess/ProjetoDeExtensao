@@ -22,7 +22,6 @@ import UpdateSupervisor from '../../Admin/Supervisor/Update';
 import UpdateAccompanied from '../../Patient/Accompanied/Update';
 import UpdateClass from '../../Admin/Class/Update';
 import UpdateServiceArea from '../../Admin/ServiceArea/Update';
-import UpdateAvailability from '../../Supervisor/Availability/Update';
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -54,12 +53,13 @@ export default function MaterialTableDemo({
   rows,
   columnsName,
   title,
-  deleteBtn,
-  availability,
-  patient,
-  supervisor,
-  classData,
-  serviceArea,
+  // deleteBtn,
+  // handleUpdate,
+  // student,
+  // patient,
+  // supervisor,
+  // classData,
+  // serviceArea,
 }) {
   const [state, setState] = useState({
     columns: columnsName,
@@ -80,35 +80,6 @@ export default function MaterialTableDemo({
         }}
         columns={state.columns}
         data={state.data}
-        actions={[
-          {
-            icon: DeleteIcon,
-            tooltip: 'Apagar',
-            onClick: (event, rows) => {
-              deleteBtn(
-                window.confirm(`Deseja desativar ${rows.name} do sistema ?`),
-                patient ? rows.id_accompanying : rows.id
-              );
-            },
-          },
-        ]}
-        detailPanel={[
-          {
-            tooltip: 'Editar',
-            icon: EditIcon,
-            render: (rows) => {
-              return (
-                <>
-                  {supervisor && <UpdateSupervisor data={rows} />}
-                  {patient && <UpdateAccompanied data={rows} />}
-                  {classData && <UpdateClass data={rows} />}
-                  {serviceArea && <UpdateServiceArea data={rows} />}
-                  {availability && <UpdateAvailability data={rows} />}
-                </>
-              );
-            },
-          },
-        ]}
       />
     </>
   );

@@ -71,11 +71,10 @@ module.exports = {
           'person.street',
           'person.number',
           'person.complement',
+          'person.password',
           'supervisor.registration',
-          'advice.name as advice',
-          'advice.uf as advice_uf',
-          'class.name as class',
-          'class.campus'
+          'advice.id as id_advice',
+          'class.id as id_class'
         );
 
       return response.status(200).json(rows);
@@ -124,6 +123,8 @@ module.exports = {
       const id = request.id;
       const {
         id_advice,
+        id_class,
+        type,
         registration,
         name,
         surname,
@@ -150,6 +151,7 @@ module.exports = {
       await connection('person')
         .where('person.id', id_person_supervisor.id_person)
         .update({
+          type,
           name,
           surname,
           cpf,
@@ -168,58 +170,13 @@ module.exports = {
         });
       await connection('supervisor').where('supervisor.id', id).update({
         id_advice,
+        id_class,
         registration,
       });
 
       return response
         .status(200)
         .json({ status: 'success', message: 'user updated' });
-    } catch (error) {
-      return response
-        .status(500)
-        .json({ message: 'internal server error', error: error });
-    }
-  },
-
-  async createAvailability(request, response) {
-    try {
-      const id_supervisor = request.id;
-      const { id_service_area, date, hourly } = request.body;
-
-      await connection('availability_for_appointment').insert({
-        id_supervisor,
-        id_service_area,
-        date,
-        hourly,
-      });
-
-      return response.status(201).json({
-        status: 'success',
-        message: 'availability for appointment created',
-      });
-    } catch (error) {
-      return response
-        .status(500)
-        .json({ message: 'internal server error', error: error });
-    }
-  },
-  async updateAvailability(request, response) {
-    try {
-      const id_supervisor = request.id;
-      const { id, date, hourly } = request.body;
-
-      await connection('availability_for_appointment')
-        .where('availability_for_appointment.id', id)
-        .andWhere('availability_for_appointment.id_supervisor', id_supervisor)
-        .update({
-          date,
-          hourly,
-        });
-
-      return response.status(201).json({
-        status: 'success',
-        message: 'availability for appointment created',
-      });
     } catch (error) {
       return response
         .status(500)

@@ -51,7 +51,14 @@ function Login() {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('name', response.data.name);
         localStorage.setItem('type', response.data.type);
-        history.push(`/${response.data.type}`);
+        if (
+          response.data.type === 'professor' ||
+          response.data.type === 'preceptor'
+        ) {
+          history.push(`/supervisor`);
+        } else {
+          history.push(`/${response.data.type}`);
+        }
       });
     } catch (error) {
       store.addNotification({

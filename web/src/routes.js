@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Access from './Pages/Access';
 import Patient from './Patient';
 import Admin from './Admin';
-import Professor from './Professor';
+import Supervisor from './Supervisor';
 import Student from './Student';
 import WebPage from './Pages/WebPage';
 
@@ -15,8 +15,7 @@ function Routes() {
         <Route path="/access" component={Access}></Route>
         <Route path="/patient" component={Patient}></Route>
         <Route path="/admin" component={Admin}></Route>
-        <Route path="/professor" component={Professor}></Route>
-        <Route path="/student" component={Student}></Route>
+        <Route path="/supervisor" component={Supervisor}></Route>
       </Switch>
     </BrowserRouter>
   );

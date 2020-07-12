@@ -180,6 +180,43 @@ module.exports = {
     }
   },
 
+  async indexStudent(request, response) {
+    try {
+      const rows = await connection('person')
+        .join('student', 'student.id_person', '=', 'person.id')
+        .join('class', 'class.id', '=', 'student.id_class')
+        .where('student.delete', false)
+        .select(
+          'student.*',
+          'student.id_class',
+          'person.type',
+          'person.name',
+          'person.surname',
+          'person.birth_date',
+          'person.cpf',
+          'person.rg',
+          'person.telephone',
+          'person.cellPhone',
+          'person.email',
+          'person.cep',
+          'person.uf',
+          'person.city',
+          'person.neighborhood',
+          'person.street',
+          'person.number',
+          'person.complement',
+          'class.name as class',
+          'class.campus'
+        );
+
+      return response.status(200).json(rows);
+    } catch (error) {
+      return response
+        .status(500)
+        .json({ message: 'internal server error', error: error });
+    }
+  },
+
   async createStudent(request, response) {
     try {
       const {
@@ -239,7 +276,7 @@ module.exports = {
 
   async updateStudent(request, response) {
     try {
-      const id = request.id;
+      const id = request.params.id;
       const {
         id_class,
         ra,
@@ -284,7 +321,6 @@ module.exports = {
           street,
           number,
           complement,
-          password,
         });
 
       await connection('student').where('student.id', id).update({
@@ -304,7 +340,7 @@ module.exports = {
   },
   async deleteStudent(request, response) {
     try {
-      const { id } = request.body;
+      const id = request.params.id;
 
       await connection('student').where('id', id).update({
         delete: true,

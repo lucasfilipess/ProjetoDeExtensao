@@ -52,6 +52,8 @@ module.exports = {
 
   supervisor_update_schema: Joi.object().keys({
     id_advice: Joi.number().integer().required(),
+    id_class: Joi.number().integer().required(),
+    type: Joi.string().required(),
     registration: Joi.number().integer().required(),
     name: Joi.string().required().min(5).max(30),
     surname: Joi.string().required().min(1).max(30),
@@ -97,7 +99,7 @@ module.exports = {
   student_schema: Joi.object().keys({
     id_class: Joi.number().integer().required(),
     ra: Joi.number().integer().min(100000000).max(999999999).required(),
-    period: Joi.number().integer().min(1).max(99).required(),
+    period: Joi.string().required().min(1).max(3),
     type: Joi.string().required(),
     name: Joi.string().required().min(5).max(30),
     surname: Joi.string().required().min(1).max(30),
@@ -113,6 +115,5 @@ module.exports = {
     street: Joi.string().min(2).max(100).required(),
     number: Joi.number().integer().min(1).max(999999).required(),
     complement: Joi.string().min(1).max(30),
-    password: Joi.string().min(8).required(),
   }),
 };

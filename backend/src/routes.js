@@ -22,6 +22,7 @@ const admin = require('./controllers/AdminController');
 const classCtrl = require('./controllers/ClassController');
 const advice = require('./controllers/AdviceController');
 const serviceArea = require('./controllers/ServiceAreaController');
+const availability = require('./controllers/AvailabilityController');
 
 routes.post(
   '/login',
@@ -122,6 +123,7 @@ routes.put(
 
 routes.delete('/admin/supervisor/:id', isAdmin, admin.deleteSupervisor);
 
+routes.get('/admin/student', admin.indexStudent);
 routes.post(
   '/admin/student',
   isAdmin,
@@ -133,27 +135,36 @@ routes.post(
 );
 
 routes.put(
-  '/admin/student',
+  '/admin/student/:id',
   isAdmin,
-  authEmail,
+  authEmailUpdate,
   celebrate({
     body: student_schema,
   }),
   admin.updateStudent
 );
 
-routes.delete('/admin/student', isAdmin, admin.deleteStudent);
+routes.delete('/admin/student/:id', isAdmin, admin.deleteStudent);
 
 // //////////////////////////////////////////////////////////////////////
 
 routes.get('/advice', advice.index);
 routes.get('/class', classCtrl.index);
 routes.get('/service-area', serviceArea.index);
+routes.get('/my-service-area', auth, serviceArea.myServiceArea);
+
 routes.post('/class', classCtrl.create);
 routes.post('/service-area', serviceArea.create);
 routes.put('/service-area/:id', serviceArea.update);
 routes.put('/class/:id', classCtrl.update);
 routes.delete('/class/:id', classCtrl.delete);
 routes.delete('/service-area/:id', serviceArea.delete);
+
+routes.get('/availability', availability.index);
+routes.get('/my-availability', auth, availability.myAvailability);
+routes.put('/my-availability/:id', auth, availability.updateAvailability);
+routes.delete('/my-availability/:id', auth, availability.deleteAvailability);
+
+routes.post('/availability', auth, availability.createAvailability);
 
 module.exports = routes;
