@@ -8,6 +8,8 @@ import {
   RiSettings4Line,
   RiHandHeartLine,
 } from 'react-icons/ri';
+import { RiQuestionLine } from 'react-icons/ri';
+
 import { FaHandsHelping } from 'react-icons/fa';
 const LoadableDashboard = Loadable({
   loader: () => import('./Pages/Patient/Dashboard'),
@@ -36,14 +38,20 @@ function App() {
       link2={'/patient/service-area'}
       link3={'/patient/accompanied'}
       link4={'/patient/settings'}
+      link5={'/patient'}
+      link6={'/patient'}
       name1={'Dashboard'}
       name2={'Atendimento'}
       name3={'Acompanhante'}
       name4={'Configurações'}
+      name5={'???'}
+      name6={'???'}
       icon1={<RiDashboardLine />}
       icon2={<RiHandHeartLine />}
       icon3={<FaHandsHelping />}
       icon4={<RiSettings4Line />}
+      icon5={<RiQuestionLine />}
+      icon6={<RiQuestionLine />}
       activeTab={isActive}
     >
       <Switch>

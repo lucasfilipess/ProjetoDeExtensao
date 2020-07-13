@@ -7,7 +7,7 @@ function SettingsConsultations({ setIsLinkActive }) {
   }, [setIsLinkActive]);
   return (
     <>
-      <h1>SettingsConsultations</h1>
+      <h1>Ainda será implementado</h1>
     </>
   );
 }

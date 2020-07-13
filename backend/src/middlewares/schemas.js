@@ -30,7 +30,7 @@ module.exports = {
     neighborhood: Joi.string().min(2).max(100).required(),
     street: Joi.string().min(2).max(100).required(),
     number: Joi.number().integer().min(1).max(999999).required(),
-    complement: Joi.string().min(1).max(30),
+    complement: Joi.string().allow(''),
     password: Joi.string().min(8).required(),
   }),
 
@@ -47,7 +47,7 @@ module.exports = {
     neighborhood: Joi.string().min(2).max(100).required(),
     street: Joi.string().min(2).max(100).required(),
     number: Joi.number().integer().min(1).max(999999).required(),
-    complement: Joi.string().min(1).max(30),
+    complement: Joi.string().allow(''),
   }),
 
   supervisor_update_schema: Joi.object().keys({
@@ -69,7 +69,7 @@ module.exports = {
     neighborhood: Joi.string().min(2).max(100).required(),
     street: Joi.string().min(2).max(100).required(),
     number: Joi.number().integer().min(1).max(999999).required(),
-    complement: Joi.string().min(1).max(30),
+    complement: Joi.string().allow(''),
     password: Joi.string().min(8).required(),
   }),
 
@@ -92,7 +92,7 @@ module.exports = {
     neighborhood: Joi.string().min(2).max(100).required(),
     street: Joi.string().min(2).max(100).required(),
     number: Joi.number().integer().min(1).max(999999).required(),
-    complement: Joi.string().min(1).max(30),
+    complement: Joi.string().allow(''),
     password: Joi.string().min(8).required(),
   }),
 
@@ -114,6 +114,6 @@ module.exports = {
     neighborhood: Joi.string().min(2).max(100).required(),
     street: Joi.string().min(2).max(100).required(),
     number: Joi.number().integer().min(1).max(999999).required(),
-    complement: Joi.string().min(1).max(30),
+    complement: Joi.string().allow(''),
   }),
 };

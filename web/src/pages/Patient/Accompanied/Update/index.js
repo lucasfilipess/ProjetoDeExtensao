@@ -81,7 +81,7 @@ function UpdateAccompanied({ data }) {
           })
         );
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
       store.addNotification({
         title: 'Ooops',
         message: 'Houve um erro ao processar a sua requisição.',

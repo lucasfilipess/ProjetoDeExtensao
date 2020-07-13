@@ -7,7 +7,7 @@ function SettingsNotifications({ setIsLinkActive }) {
   }, [setIsLinkActive]);
   return (
     <>
-      <h1>SettingsNotifications</h1>
+      <h1>Ainda será implementado</h1>
     </>
   );
 }

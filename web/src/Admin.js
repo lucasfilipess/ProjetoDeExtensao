@@ -6,6 +6,7 @@ import Loader from './Pages/Loader';
 import Error from './Pages/Error';
 import { FaUserGraduate, FaUserMd, FaUniversity } from 'react-icons/fa';
 import { RiHandHeartLine } from 'react-icons/ri';
+import { RiQuestionLine } from 'react-icons/ri';
 
 const LoadableSupervisor = Loadable({
   loader: () => import('./Pages/Admin/Supervisor'),
@@ -41,14 +42,20 @@ function Admin() {
         link2={'/admin/student'}
         link3={'/admin/class'}
         link4={'/admin/service-area'}
+        link5={'/admin'}
+        link6={'/admin'}
         name1={'Supervisor'}
         name2={'Aluno'}
         name3={'Curso'}
-        name4={'Atendimento'}
+        name4={'???'}
+        name5={'???'}
+        name6={'???'}
         icon1={<FaUserMd />}
         icon2={<FaUserGraduate />}
         icon3={<FaUniversity />}
         icon4={<RiHandHeartLine />}
+        icon5={<RiQuestionLine />}
+        icon6={<RiQuestionLine />}
         activeTab={isActive}
       >
         <Switch>

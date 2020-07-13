@@ -19,6 +19,11 @@ exports.seed = function (knex) {
           name: 'Conselho Regional de Nutricionistas - CRN9',
           uf: 'MG',
         },
+        {
+          id: 4,
+          name: 'Conselho Regional de Psicologia',
+          uf: 'MG',
+        },
       ]);
     });
 };

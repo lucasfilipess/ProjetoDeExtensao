@@ -8,8 +8,7 @@ Na fase de desenvolvimento esta comunicação é feita em localhost através da 
 
 Para rodar a aplicação será necessário ter instalado em sua máquina a última versão do [**NodeJs**](https://nodejs.org/pt-br/download/package-manager/) aconselho utilizar um gerenciador de pacotes para isso.
 
-Clone o repositório usando git clone https://github.com/Lucas-FilipeSS/ProjetoExtensao.git.
-Depois navegue até a pasta do frontend e utilize o comando "**npm install**" ou "**yarn install**" se for o caso, após instalar os node modules utilize "**npm start**" ou "**yarn start**", a aplicação estará disponível em http://localhost:3000
+Depois navegue até a pasta do web e utilize o comando "**npm install**" ou "**yarn install**" se for o caso, após instalar os node modules utilize "**npm start**" ou "**yarn start**", a aplicação estará disponível em http://localhost:3000
 
 ## Figma
 

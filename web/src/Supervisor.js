@@ -6,6 +6,7 @@ import Layout from './Pages/Layout';
 import { FaUserGraduate, FaUserMd, FaUniversity } from 'react-icons/fa';
 import { RiHandHeartLine } from 'react-icons/ri';
 import { AiTwotoneCalendar } from 'react-icons/ai';
+import { RiQuestionLine } from 'react-icons/ri';
 
 const LoadableProfile = Loadable({
   loader: () => import('./Pages/Supervisor/Profile'),
@@ -23,16 +24,22 @@ function Professor() {
     <Layout
       link1={'/supervisor'}
       link2={'/supervisor/availability'}
-      // link3={'/admin/class'}
-      // link4={'/admin/service-area'}
+      link3={'/supervisor'}
+      link4={'/supervisor'}
+      link5={'/supervisor'}
+      link6={'/supervisor'}
       name1={'Perfil'}
       name2={'Consultas'}
-      // name3={'Curso'}
-      // name4={'Atendimento'}
+      name3={'???'}
+      name4={'???'}
+      name5={'???'}
+      name6={'???'}
       icon1={<FaUserMd />}
       icon2={<AiTwotoneCalendar />}
-      // icon3={<FaUniversity />}
-      // icon4={<RiHandHeartLine />}
+      icon3={<RiQuestionLine />}
+      icon4={<RiQuestionLine />}
+      icon5={<RiQuestionLine />}
+      icon6={<RiQuestionLine />}
       activeTab={isActive}
     >
       <Switch>
