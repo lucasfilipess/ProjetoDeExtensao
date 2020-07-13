@@ -4,8 +4,9 @@
   padding: 10px 15px;
   .ImageContainer {
     height: 150px;
-    margin-left: 30px;
-    margin-right: 47px;
+    // margin-left: 30px;
+    // margin-right: 47px;
+    border-radius: 8px;
     background: linear-gradient(
       180deg,
       rgba(22, 101, 216, 0.47017) 0%,
@@ -30,67 +31,68 @@
 
   .BoxContainer {
     display: grid;
-    grid-template-columns: repeat(3, 365px);
-    justify-content: center;
-    margin-left: 30px;
+    grid-template-columns: repeat(2, 545px);
+    justify-content: space-around;
 
-    div {
+    & > div {
       display: flex;
-      justify-content: center top;
       flex-direction: column;
       align-items: center;
+      padding: 35px;
       margin-top: 30px;
-      width: 320px;
-      height: 150px;
-      background: #ffffff;
+      width: 100%;
+      height: 400px;
       background: #ffffff;
       border: 1px solid rgba(63, 63, 68, 0.005);
       box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.582),
         0px 1px 0px rgba(63, 63, 68, 0.05);
-      border-radius: 0px;
-      img {
-        width: 30px;
-        height: 30px;
+      border-radius: 8px;
+      & > img {
+        width: 40px;
+        height: 40px;
+      }
+      p {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 22px;
+        text-align: justify;
+        margin-top: 15px;
+        color: #66788a;
+      }
+      & > h2 {
+        margin-top: 10px;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 21px;
+        text-align: center;
+        color: #212b36;
+      }
+      & > div {
+        display: flex;
+        p {
+          font-size: 20px;
+          margin: 15px 5px 0 5px;
+          color: #212b36;
+        }
+      }
+      button {
+        color: #fff;
+        height: 40px;
+        background: #1665d8;
+        margin-top: 10px;
+        border-radius: 4px;
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2),
+          0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14);
+        width: 100%;
+        margin-top: auto;
       }
     }
-
-    .Name {
-      height: 21px;
-      left: 31.8%;
-      right: 31.8%;
-      top: calc(50% - 21px / 2 - 20.5px);
-      margin-top: 10px;
-      font-family: Arial, Helvetica, sans-serif, sans-serif;
-      font-size: 20;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 18px;
-      line-height: 21px;
-
-      text-align: center;
-
-      color: #212b36;
-    }
-  }
-  .Description {
-    left: 0%;
-    right: 0%;
-    top: 46.77%;
-    bottom: 0%;
-
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 16px;
-    text-align: center;
-    margin-top: 15px;
-
-    color: #66788a;
   }
 }
 
-@media only screen and (max-width: $sm) {
+@media only screen and (max-width: $md) {
   .Container {
     .BoxContainer {
       grid-template-columns: repeat(1, 365px);

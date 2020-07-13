@@ -23,6 +23,7 @@ const classCtrl = require('./controllers/ClassController');
 const advice = require('./controllers/AdviceController');
 const serviceArea = require('./controllers/ServiceAreaController');
 const availability = require('./controllers/AvailabilityController');
+const appointment = require('./controllers/AppointmentController');
 
 routes.post(
   '/login',
@@ -166,5 +167,7 @@ routes.put('/my-availability/:id', auth, availability.updateAvailability);
 routes.delete('/my-availability/:id', auth, availability.deleteAvailability);
 
 routes.post('/availability', auth, availability.createAvailability);
+routes.post('/appointment', auth, appointment.create);
+routes.get('/appointment', auth, appointment.getMyAppointments);
 
 module.exports = routes;

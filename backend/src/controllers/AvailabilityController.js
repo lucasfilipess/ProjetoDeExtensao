@@ -1,10 +1,32 @@
 const connection = require('../database/connection');
 const GenerateToken = require('../utils/GenerateToken');
+const { join } = require('../database/connection');
 
 module.exports = {
   async index(request, response) {
     try {
-      const rows = await connection('availability_for_appointment').select('*');
+      const rows = await connection('availability_for_appointment')
+        .join(
+          'service_area',
+          'service_area.id',
+          '=',
+          'availability_for_appointment.id_service_area'
+        )
+        .join(
+          'supervisor',
+          'supervisor.id',
+          '=',
+          'availability_for_appointment.id_supervisor'
+        )
+        .join('person', 'person.id', '=', 'supervisor.id_person')
+        .where('availability_for_appointment.has_patient', false)
+        .select(
+          'availability_for_appointment.*',
+          'service_area.name',
+          'service_area.description',
+          'person.name as supervisor_name',
+          'person.surname as supervisor_surname'
+        );
 
       return response.status(200).json(rows);
     } catch (error) {

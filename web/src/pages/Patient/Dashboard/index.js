@@ -27,12 +27,28 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 import InfiniteCalendar from 'react-infinite-calendar';
 import 'react-infinite-calendar/styles.css';
+import api from '../../../Services/api';
 
 function Dashboard({ setIsActive }) {
   useEffect(() => {
     setIsActive(1);
+    async function getAppointment() {
+      try {
+        await api
+          .get('/appointment', {
+            headers: {
+              authorization: localStorage.getItem('token'),
+            },
+          })
+          .then((response) => setAppointment(response.data));
+      } catch (error) {
+        console.log(error.response);
+      }
+    }
+    getAppointment();
   }, [setIsActive]);
 
+  const [appointment, setAppointment] = useState([]);
   const [value, onChange] = useState(new Date());
 
   var today = new Date();
@@ -41,74 +57,48 @@ function Dashboard({ setIsActive }) {
     today.getMonth(),
     today.getDate() - 7
   );
+  console.log(appointment);
+
   return (
     <>
       <div className={Container}>
         <div className={Boxes}>
-          <div>
-            <h2>Proxima Consulta</h2>
-            <img src={calendarSvg} alt="calendar" />
-            <p>8 de Julho (Quinta-feira)</p>
-            <p>Horario: 09:00</p>
-          </div>
-          <div>
-            <h2>Consultas Agendadas</h2>
-            <p>8 de Julho (Quinta-feira)</p>
-            <p>17 de Julho (Segunda-feira)</p>
-          </div>
-          <div>
-            <h2>Consultas Passadas</h2>
-            <p>12 de Agosto (Terça-feira)</p>
-            <p>13 de Julho (Terça-feira)</p>
-          </div>
-          <div className={BlueBox}>
-            <h2>Especialidades</h2>
-            <p>Clinico Geral</p>
-            <p>Fisioterapeuta</p>
-            <p>Pesquisar</p>
-          </div>
+          {appointment.map((item) => (
+            <div key={item.id}>
+              <h2>Proxima Consulta</h2>
+              <img src={calendarSvg} alt="calendar" />
+              <p>{item.service_area}</p>
+              <div>
+                <p>{item.name}</p>
+                <p>{item.surname}</p>
+              </div>
+              <p>{item.date}</p>
+              <p>{item.horary}</p>
+            </div>
+          ))}
         </div>
-
-        <div className={Boxes2}>
-          <div
-          // className={Warnings}
-          // style={{ backgroundImage: `url(${pills})` }}
-          >
-            {/* <p>Saiba como jogar fora medicamentos vencidos</p>
-            <div className={Arrow}>
-              <AiOutlineArrowLeft />
-              <AiOutlineArrowRight />
-            </div> */}
+        <div>
+          <div>
             <Carousel>
               <div>
                 <img src={pills} />
-                {/* <p className="legend">Legend 1</p> */}
               </div>
               <div>
                 <img src={pills} />
-                {/* <p className="legend">Legend 2</p> */}
               </div>
               <div>
                 <img src={pills} />
-                {/* <p className="legend">Legend 3</p> */}
               </div>
             </Carousel>
           </div>
           <div>
-            {/* <img src={calendar} alt="calendar" /> */}
-            <Calendar
-              onChange={onChange}
-              value={value}
-              showWeekNumbers={true}
-            />
-
-            {/* <InfiniteCalendar
+            <InfiniteCalendar
               width={400}
-              height={600}
+              height={280}
               selected={today}
               disabledDays={[0, 6]}
               minDate={lastWeek}
-            /> */}
+            />
           </div>
         </div>
 
@@ -116,17 +106,17 @@ function Dashboard({ setIsActive }) {
           <div className={SocialMedia}>
             <img src={calendarGoogle} alt="calendar" />
             <button>Adicione suas consultas no Google Agenda</button>
-            <div>
+            {/* <div>
               <img src={facebookIcon} alt="social media" />
               <img src={gmailIcon} alt="social media" />
               <img src={whatsappIcon} alt="social media" />
               <img src={youtubeIcon} alt="social media" />
-            </div>
+            </div> */}
           </div>
-          <div
+          {/* <div
             className={Graphic}
             style={{ backgroundImage: `url(${graphic})` }}
-          ></div>
+          ></div> */}
         </div>
       </div>
     </>

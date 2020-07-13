@@ -1,0 +1,206 @@
+// import styled from 'styled-components';
+// import { Carousel } from 'react-responsive-carousel';
+
+// export const Container = styled.div`
+//   &&& {
+//     display: flex;
+//     width: 100%;
+//     padding: 10px;
+//     justify-content: center;
+//     & > div {
+//       margin-right: 30px;
+//     }
+//     & > div + div {
+//       margin-right: 0px;
+//     }
+//     @media (max-width: 766px) {
+//       & > div {
+//         margin: 0;
+//       }
+//       & > div + div {
+//         display: none;
+//       }
+//     }
+//     @media (max-width: 992px) {
+//       & > div {
+//         margin-right: 20px;
+//       }
+//     }
+//   }
+// `;
+
+// // export const ContainerMobile = styled.div`
+// //   &&& {
+// //     display: flex;
+// //     width: 100%;
+// //     padding: 10px;
+// //     justify-content: center;
+// //     &:nth-child(3) {
+// //       display: none;
+// //     }
+// //     @media (max-width: 766px) {
+// //       & > div + div {
+// //         display: none;
+// //         /* background-color: red; */
+// //       }
+// //     }
+// //   }
+// // `;
+
+// .StyledCarousel{
+//   &:nth-child(1) {
+//     display: flex;
+//     padding: 0;
+//     margin: 0;
+//   }
+//   .control-dots {
+//     display: none;
+//   }
+//   .carousel {
+//     display: flex;
+//     padding: 0;
+//   }
+//   .carousel.carousel-slider {
+//     overflow: unset;
+//     width: 100%;
+//   }
+//   .slide {
+//     background-color: #fff;
+//   }
+//   .carousel-status {
+//     display: none;
+//   }
+//   .thumbs-wrapper {
+//     display: none;
+//   }
+//   button {
+//     width: auto;
+//     height: fit-content;
+//     align-self: center;
+//   }
+//   @media (max-width: 992px) {
+//     button {
+//       img {
+//         width: 45px;
+//         height: 45px;
+//       }
+//     }
+//   }
+//   @media (max-width: 766px) {
+//     button {
+//       img {
+//         width: 40px;
+//         height: 40px;
+//       }
+//     }
+//   }
+// };
+
+// export const ReverseBtn = styled.button`
+//   transform: rotate(180deg);
+// `;
+
+// export const CommentCard = styled.div`
+//   &&& {
+//     display: flex;
+//     justify-content: center;
+//     flex-direction: column;
+//     max-width: 470px;
+//     max-height: 240px;
+//     border-radius: 5px;
+//     box-shadow: 0 6px 12px 0 rgba(32, 33, 39, 0.08);
+//     background-color: #ffffff;
+//     padding: 30px;
+//     text-align: left;
+
+//     & > div {
+//       display: flex;
+//       align-items: center;
+//       margin-bottom: 20px;
+
+//       & > img {
+//         width: 50px;
+//         height: 50px;
+//         border-radius: 100%;
+//         object-fit: cover;
+//         margin-right: 10px;
+//       }
+//       & > div {
+//         text-align: left;
+//         & > h3 {
+//           font-size: 16px;
+//           font-weight: bold;
+//           font-stretch: normal;
+//           font-style: normal;
+//           letter-spacing: normal;
+//           color: #07161f;
+//         }
+//         & > p {
+//           font-size: 13px;
+//           font-weight: normal;
+//           font-stretch: normal;
+//           font-style: normal;
+//           line-height: normal;
+//           letter-spacing: normal;
+//           color: #5d666b;
+//         }
+//       }
+//     }
+//     & > p {
+//       max-width: 400px;
+//       font-size: 16px;
+//       font-weight: normal;
+//       font-stretch: normal;
+//       font-style: normal;
+//       line-height: 1.63;
+//       letter-spacing: normal;
+//       color: #5d666b;
+//     }
+
+//     @media (max-width: 992px) {
+//       padding: 20px;
+//       & > div {
+//         & > img {
+//           width: 45px;
+//           height: 45px;
+//           margin-right: 10px;
+//         }
+//         & > div {
+//           & > h3 {
+//             /* font-size: 15px; */
+//           }
+//           & > p {
+//             /* font-size: 12px; */
+//           }
+//         }
+//       }
+//       & > p {
+//         font-size: 14px;
+//         text-align: justify;
+//       }
+//     }
+
+//     @media (max-width: 766px) {
+//       padding: 20px;
+//       & > div {
+//         & > img {
+//           width: 45px;
+//           height: 45px;
+//           margin-right: 10px;
+//         }
+//         & > div {
+//           & > h3 {
+//             font-size: 15px;
+//           }
+//           & > p {
+//             font-size: 12px;
+//           }
+//         }
+//       }
+//       & > p {
+//         font-size: 12px;
+//         text-align: justify;
+//       }
+//     }
+//   }
+// `;
