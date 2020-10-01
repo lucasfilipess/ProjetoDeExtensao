@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
-import Loader from './Pages/Loader';
-import Layout from './Pages/Layout';
+import Loader from './pages/Loader';
+import Layout from './pages/Layout';
 import { FaUserGraduate, FaUserMd, FaUniversity } from 'react-icons/fa';
 import { RiHandHeartLine } from 'react-icons/ri';
 import { AiTwotoneCalendar } from 'react-icons/ai';
 import { RiQuestionLine } from 'react-icons/ri';
 
 const LoadableProfile = Loadable({
-  loader: () => import('./Pages/Supervisor/Profile'),
+  loader: () => import('./pages/Supervisor/Profile'),
   loading: Loader,
 });
 const LoadableAvailability = Loadable({
-  loader: () => import('./Pages/Supervisor/Availability'),
+  loader: () => import('./pages/Supervisor/Availability'),
   loading: Loader,
 });
 

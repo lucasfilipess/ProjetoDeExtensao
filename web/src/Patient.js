@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
-import Layout from './Pages/Layout';
-import Loader from './Pages/Loader';
+import Layout from './pages/Layout';
+import Loader from './pages/Loader';
 import {
   RiDashboardLine,
   RiSettings4Line,
@@ -12,20 +12,20 @@ import { RiQuestionLine } from 'react-icons/ri';
 
 import { FaHandsHelping } from 'react-icons/fa';
 const LoadableDashboard = Loadable({
-  loader: () => import('./Pages/Patient/Dashboard'),
+  loader: () => import('./pages/Patient/Dashboard'),
   loading: Loader,
 });
 const LoadableSettings = Loadable({
-  loader: () => import('./Pages/Patient/Settings'),
+  loader: () => import('./pages/Patient/Settings'),
   loading: Loader,
 });
 
 const LoadableServiceArea = Loadable({
-  loader: () => import('./Pages/Patient/ServiceArea'),
+  loader: () => import('./pages/Patient/ServiceArea'),
   loading: Loader,
 });
 const LoadableAccompanied = Loadable({
-  loader: () => import('./Pages/Patient/Accompanied'),
+  loader: () => import('./pages/Patient/Accompanied'),
   loading: Loader,
 });
 

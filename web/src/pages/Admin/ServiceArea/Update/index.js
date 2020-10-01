@@ -6,7 +6,7 @@ import {
   StyledInput,
   StyledFocus,
 } from './styles.module.scss';
-import api from '../../../../Services/api';
+import api from '../../../../services/api';
 import { store } from 'react-notifications-component';
 
 function UpdateServiceArea({ data }) {

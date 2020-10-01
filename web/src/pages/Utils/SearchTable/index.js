@@ -20,7 +20,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import UpdateSupervisor from '../../Admin/Supervisor/Update';
 import UpdateAccompanied from '../../Patient/Accompanied/Update';
-import UpdateClass from '../../Admin/Class/Update';
+// import UpdateClass from '../../Admin/Class/Update';
 import UpdateServiceArea from '../../Admin/ServiceArea/Update';
 import UpdateAvailability from '../../Supervisor/Availability/Update';
 
@@ -101,7 +101,7 @@ export default function MaterialTableDemo({
                 <>
                   {supervisor && <UpdateSupervisor data={rows} />}
                   {patient && <UpdateAccompanied data={rows} />}
-                  {classData && <UpdateClass data={rows} />}
+                  {/* {classData && <UpdateClass data={rows} />} */}
                   {serviceArea && <UpdateServiceArea data={rows} />}
                   {availability && <UpdateAvailability data={rows} />}
                 </>

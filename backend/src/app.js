@@ -4,7 +4,6 @@ const app = express();
 const cors = require('cors');
 const { errors } = require('celebrate');
 
-
 app.use(cors());
 app.use(express.json());
 app.use(routes);

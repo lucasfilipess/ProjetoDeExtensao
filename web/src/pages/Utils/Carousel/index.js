@@ -8,8 +8,8 @@
 // } from './styles';
 // import { Carousel } from 'react-responsive-carousel';
 
-// import arrowLeft from '../../../Assets/images/arrow-left.svg';
-// import arrowRight from '../../../Assets/images/arrow-right.svg';
+// import arrowLeft from '../../../assets/images/arrow-left.svg';
+// import arrowRight from '../../../assets/images/arrow-right.svg';
 
 // export default function CustomCarousel() {
 //   const createCarouselItemImage = (index, options = {}) => (

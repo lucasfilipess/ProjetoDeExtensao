@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Access from './Pages/Access';
+import Access from './pages/Access';
 import Patient from './Patient';
 import Admin from './Admin';
 import Supervisor from './Supervisor';
 import Student from './Student';
-import WebPage from './Pages/WebPage';
+import WebPage from './pages/WebPage';
 
 function Routes() {
   return (

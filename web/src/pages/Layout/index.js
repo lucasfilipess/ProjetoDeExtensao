@@ -21,9 +21,9 @@ import {
 } from './styles.module.scss';
 import { RiQuestionLine } from 'react-icons/ri';
 import { Link, useHistory } from 'react-router-dom';
-import bell from '../../Assets/images/bell.svg';
-import logout from '../../Assets/images/logout.svg';
-import profile from '../../Assets/images/user.svg';
+import bell from '../../assets/images/bell.svg';
+import logout from '../../assets/images/logout.svg';
+import profile from '../../assets/images/user.svg';
 import { AiOutlineMenuFold, AiOutlineMenuUnfold } from 'react-icons/ai';
 
 function Layout({

@@ -6,19 +6,20 @@ import {
   StyledInput,
   StyledFocus,
 } from './styles.module.scss';
-import api from '../../../../Services/api';
+import api from '../../../../../services/api';
 import { store } from 'react-notifications-component';
 
-function UpdateClass({ data }) {
+function Add({ setIsLinkActive }) {
+  useEffect(() => {
+    setIsLinkActive(2);
+  }, [setIsLinkActive]);
+
   const [values, setValues] = useState({
-    id: '',
     campus: '',
     name: '',
     duration: '',
   });
-  useState(() => {
-    setValues(data);
-  }, []);
+
   function handleChange(e) {
     setValues({
       ...values,
@@ -37,10 +38,10 @@ function UpdateClass({ data }) {
     console.log(data);
 
     try {
-      await api.put(`class/${values.id}`, data).then(() =>
+      await api.post('class', data).then(() =>
         store.addNotification({
           title: 'Sucesso',
-          message: `O curso ${data.name}, foi atualizado com sucesso`,
+          message: `O curso ${data.name}, foi cadastrado com sucesso`,
           type: 'success',
           insert: 'top',
           container: 'top-right',
@@ -54,6 +55,7 @@ function UpdateClass({ data }) {
       );
     } catch (error) {
       console.log(error);
+
       store.addNotification({
         title: 'Ooops',
         message: 'Houve um erro ao processar a sua requisição.',
@@ -129,4 +131,4 @@ function UpdateClass({ data }) {
   );
 }
 
-export default UpdateClass;
+export default Add;

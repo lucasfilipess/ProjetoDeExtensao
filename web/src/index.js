@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Routes from './routes';
 import 'react-notifications-component/dist/theme.css';
 import ReactNotification from 'react-notifications-component';
-import './Assets/main.css';
+import './assets/main.css';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({

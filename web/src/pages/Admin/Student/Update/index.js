@@ -7,7 +7,7 @@ import {
   StyledFocus,
   Password,
 } from './styles.module.scss';
-import api from '../../../../Services/api';
+import api from '../../../../services/api';
 import { store } from 'react-notifications-component';
 import { FiEye } from 'react-icons/fi';
 

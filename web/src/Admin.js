@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
-import Layout from './Pages/Layout';
-import Loader from './Pages/Loader';
-import Error from './Pages/Error';
+import Layout from './pages/Layout';
+import Loader from './pages/Loader';
+import Error from './pages/Error';
 import { FaUserGraduate, FaUserMd, FaUniversity } from 'react-icons/fa';
 import { RiHandHeartLine } from 'react-icons/ri';
 import { RiQuestionLine } from 'react-icons/ri';
 
 const LoadableSupervisor = Loadable({
-  loader: () => import('./Pages/Admin/Supervisor'),
+  loader: () => import('./pages/Admin/Supervisor'),
   loading: Loader,
 });
 const LoadableStudent = Loadable({
-  loader: () => import('./Pages/Admin/Student'),
+  loader: () => import('./pages/Admin/Student'),
   loading: Loader,
 });
 
-const LoadableClass = Loadable({
-  loader: () => import('./Pages/Admin/Class'),
-  loading: Loader,
-});
+// const LoadableClass = Loadable({
+//   loader: () => import('./pages/Admin/Class'),
+//   loading: Loader,
+// });
 
 const LoadableServiceArea = Loadable({
-  loader: () => import('./Pages/Admin/ServiceArea'),
+  loader: () => import('./pages/Admin/ServiceArea'),
   loading: Loader,
 });
 function Admin() {
@@ -71,12 +71,12 @@ function Admin() {
               <LoadableStudent {...props} setIsActive={setIsActive} />
             )}
           />
-          <Route
+          {/* <Route
             path="/admin/class"
             render={(props) => (
               <LoadableClass {...props} setIsActive={setIsActive} />
             )}
-          />
+          /> */}
           <Route
             path="/admin/service-area"
             render={(props) => (

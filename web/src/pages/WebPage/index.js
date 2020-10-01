@@ -1,6 +1,6 @@
 import React from 'react';
-import HomeBanner from '../../Assets/images/home-banner.jpg';
-import SecondBanner from '../../Assets/images/pattern_bg.jpg';
+import HomeBanner from '../../assets/images/home-banner.jpg';
+import SecondBanner from '../../assets/images/pattern_bg.jpg';
 import {
   Container,
   Banner,

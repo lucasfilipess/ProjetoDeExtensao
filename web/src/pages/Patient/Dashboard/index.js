@@ -11,23 +11,23 @@ import {
   SocialMedia,
   Graphic,
 } from './styles.module.scss';
-// import calendar from '../../../Assets/images/calendar.png';
+// import calendar from '../../../assets/images/calendar.png';
 import Calendar from 'react-calendar';
-import calendarSvg from '../../../Assets/images/calendar.svg';
-import pills from '../../../Assets/images/kendal-L4iKccAChOc-unsplash.jpg';
-import calendarGoogle from '../../../Assets/images/googleAgenda.webp';
-import facebookIcon from '../../../Assets/images/facebook.svg';
-import gmailIcon from '../../../Assets/images/email.svg';
-import whatsappIcon from '../../../Assets/images/whatsapp.svg';
-import youtubeIcon from '../../../Assets/images/youtube.svg';
-import graphic from '../../../Assets/images/grafico.PNG';
+import calendarSvg from '../../../assets/images/calendar.svg';
+import pills from '../../../assets/images/kendal-L4iKccAChOc-unsplash.jpg';
+import calendarGoogle from '../../../assets/images/googleAgenda.webp';
+import facebookIcon from '../../../assets/images/facebook.svg';
+import gmailIcon from '../../../assets/images/email.svg';
+import whatsappIcon from '../../../assets/images/whatsapp.svg';
+import youtubeIcon from '../../../assets/images/youtube.svg';
+import graphic from '../../../assets/images/grafico.PNG';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import 'react-calendar/dist/Calendar.css';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import InfiniteCalendar from 'react-infinite-calendar';
 import 'react-infinite-calendar/styles.css';
-import api from '../../../Services/api';
+import api from '../../../services/api';
 
 function Dashboard({ setIsActive }) {
   useEffect(() => {

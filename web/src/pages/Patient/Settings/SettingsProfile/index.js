@@ -11,8 +11,8 @@ import {
   StyledInput,
   StyledFocus,
 } from './styles.module.scss';
-import user from '../../../../Assets/images/user.svg';
-import api from '../../../../Services/api';
+import user from '../../../../assets/images/user.svg';
+import api from '../../../../services/api';
 
 function SettingsProfile({ setIsLinkActive }) {
   useEffect(() => {

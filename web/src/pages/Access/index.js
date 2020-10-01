@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Banner } from './styles.module.scss';
-import loginBanner from '../../Assets/images/login-banner.jpg';
+import loginBanner from '../../assets/images/login-banner.jpg';
 import { Switch, Route } from 'react-router-dom';
 import Register from './Register';
 import Login from './Login';

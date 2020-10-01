@@ -7,7 +7,7 @@ import {
   StyledFocus,
   StyledCheckbox,
 } from './styles.module.scss';
-import api from '../../../Services/api';
+import api from '../../../services/api';
 import { Link, useHistory } from 'react-router-dom';
 import { BsArrowLeft } from 'react-icons/bs';
 import { store } from 'react-notifications-component';

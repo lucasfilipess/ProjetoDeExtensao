@@ -20,7 +20,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import UpdateSupervisor from '../../Admin/Supervisor/Update';
 import UpdateAccompanied from '../../Patient/Accompanied/Update';
-import UpdateClass from '../../Admin/Class/Update';
+// import UpdateClass from '../../Admin/Class/Update';
 import UpdateServiceArea from '../../Admin/ServiceArea/Update';
 
 const tableIcons = {

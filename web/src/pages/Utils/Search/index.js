@@ -1,5 +1,5 @@
 // import React from 'react';
-// import api from '../../../Services/api';
+// import api from '../../../services/api';
 
 // const people = [
 //   'Siri',

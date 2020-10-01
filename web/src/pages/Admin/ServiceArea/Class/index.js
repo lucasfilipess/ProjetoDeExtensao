@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Nav, Content, ActiveLink, StyledLink } from './styles.module.scss';
 import { Link, Switch, Route } from 'react-router-dom';
 import Loadable from 'react-loadable';
-import Loader from '../../Loader';
+import Loader from '../../../Loader';
 
 const LoadableAdd = Loadable({
   loader: () => import('./Add'),

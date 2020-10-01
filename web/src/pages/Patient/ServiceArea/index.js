@@ -7,14 +7,14 @@ import {
   Name,
   Description,
 } from './styles.module.scss';
-import medicine_icon from '../../../Assets/images/medicine_icon.svg';
-import api from '../../../Services/api';
-import nutrition from '../../../Assets/images/nutrition.svg';
-import teeth from '../../../Assets/images/teeth.svg';
-import brain from '../../../Assets/images/brain.svg';
-import fisio from '../../../Assets/images/fisio.svg';
-import nurse from '../../../Assets/images/nurse.svg';
-import banner from '../../../Assets/images/carousel.jpg';
+import medicine_icon from '../../../assets/images/medicine_icon.svg';
+import api from '../../../services/api';
+import nutrition from '../../../assets/images/nutrition.svg';
+import teeth from '../../../assets/images/teeth.svg';
+import brain from '../../../assets/images/brain.svg';
+import fisio from '../../../assets/images/fisio.svg';
+import nurse from '../../../assets/images/nurse.svg';
+import banner from '../../../assets/images/carousel.jpg';
 import { store } from 'react-notifications-component';
 
 // import Search from '../../Utils/Search';

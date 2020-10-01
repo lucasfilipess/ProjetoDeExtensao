@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import SearchTable from '../../../Utils/SearchTable';
-import api from '../../../../Services/api';
+import SearchTable from '../../../../Utils/SearchTable';
+import api from '../../../../../services/api';
 import { Container } from './styles.module.scss';
 import { store } from 'react-notifications-component';
 import { Route, Switch } from 'react-router-dom';

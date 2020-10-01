@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
-import Loader from './Pages/Loader';
-import Layout from './Pages/Layout';
+import Loader from './pages/Loader';
+import Layout from './pages/Layout';
 
 // const LoadableDashboard = Loadable({
 //   loader: () => import('./pages/Dashboard'),
